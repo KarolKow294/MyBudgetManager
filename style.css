@@ -51,13 +51,18 @@ body {
   /*height: 560px*/
 }
 
-.registration-container {
+.registration-container, .login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 20px;
 }
 
 .registration-container div {
+  width: 300px;
+}
+
+.login-container div {
   width: 300px;
 }
 
