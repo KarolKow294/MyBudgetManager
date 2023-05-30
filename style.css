@@ -14,13 +14,13 @@ body {
   color: #fff;
 }
 
-#signup-button {
+#registration-button {
   background-color: rgb(0, 112, 186);
   border-radius: 25px;
   margin-left: 9px;
 }
 
-#signup-button:hover {
+#registration-button:hover {
   background-color: #fff;
   color: rgb(0, 112, 186);
 }
@@ -48,5 +48,25 @@ body {
 }
 
 .carousel-inner {
-  height: 560px
+  /*height: 560px*/
+}
+
+.registration-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.registration-container div {
+  width: 300px;
+}
+
+#data-confirmation-button {
+  width: 300px;
+  background-color: rgb(0, 112, 186);
+}
+
+#data-confirmation-button:hover {
+  background-color: #fff;
+  color: rgb(0, 112, 186);
 }
