@@ -31,14 +31,14 @@
             </svg> Strona główna</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-coin" viewBox="0 0 16 16">
+            <a class="nav-link" href="./income.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-coin" viewBox="0 0 16 16">
               <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9H5.5zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518l.087.02z"/>
               <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
               <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11zm0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/>
             </svg> Dodaj przychód</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./expense.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
+            <a class="nav-link active" href="./expense.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
               <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
               <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
             </svg> Dodaj wydatek</a>
@@ -65,7 +65,7 @@
     </div>
   </nav>
 
-  <!--Income window-->
+  <!--Expense window-->
   <div class="login-container">
     <h2>Wprowadz dane:</h2>
     
@@ -86,20 +86,87 @@
     
     <ul class="list-group mb-3">
       <li class="list-group-item">
-        <input class="form-check-input me-3" type="radio" name="incomeGroupRadio" value="" id="incomeSalaryRadio" checked>
-        <label class="form-check-label" for="incomeSalaryRadio">Wynagrodzenie</label>
+        <input class="form-check-input me-3" type="radio" name="paymentGroupRadio" value="" id="cashRadio" checked>
+        <label class="form-check-label" for="cashRadio">Gotówka</label>
       </li>
       <li class="list-group-item">
-        <input class="form-check-input me-3" type="radio" name="incomeGroupRadio" value="" id="incomeInterestsRadio">
-        <label class="form-check-label" for="incomeInterestsRadio">Odsetki bankowe</label>
+        <input class="form-check-input me-3" type="radio" name="paymentGroupRadio" value="" id="debitCardRadio">
+        <label class="form-check-label" for="debitCardRadio">Karta debetowa</label>
       </li>
       <li class="list-group-item">
-        <input class="form-check-input me-3" type="radio" name="incomeGroupRadio" value="" id="incomeAllegroRadio">
-        <label class="form-check-label" for="incomeAllegroRadio">Sprzedaż na allegro</label>
+        <input class="form-check-input me-3" type="radio" name="paymentGroupRadio" value="" id="creditCardRadio">
+        <label class="form-check-label" for="creditCardRadio">Karta kredytowa</label>
+      </li>
+    </ul>
+
+    <ul class="list-group mb-3">
+      <li class="list-group-item">
+        <input class="form-check-input me-3" type="radio" name="expenseGroupRadio" value="" id="expenseFoodRadio" checked>
+        <label class="form-check-label" for="expenseFoodRadio">Jedzenie</label>
       </li>
       <li class="list-group-item">
-        <input class="form-check-input me-3" type="radio" name="incomeGroupRadio" value="" id="incomeOtherRadio">
-        <label class="form-check-label" for="incomeOtherRadio">Inne</label>
+        <input class="form-check-input me-3" type="radio" name="expenseGroupRadio" value="" id="expenseFlatRadio">
+        <label class="form-check-label" for="expenseFlatRadio">Mieszkanie</label>
+      </li>
+      <li class="list-group-item">
+        <input class="form-check-input me-3" type="radio" name="expenseGroupRadio" value="" id="expenseTransportRadio">
+        <label class="form-check-label" for="expenseTransportRadio">Transport</label>
+      </li>
+      <li class="list-group-item">
+        <input class="form-check-input me-3" type="radio" name="expenseGroupRadio" value="" id="expenseTelecommunicationRadio">
+        <label class="form-check-label" for="expenseTelecommunicationRadio">Telekomunikacja</label>
+      </li>
+      <li class="list-group-item">
+        <input class="form-check-input me-3" type="radio" name="expenseGroupRadio" value="" id="expenseHealthcareRadio">
+        <label class="form-check-label" for="expenseHealthcareRadio">Opieka zdrowotna</label>
+      </li>
+      <li class="list-group-item">
+        <input class="form-check-input me-3" type="radio" name="expenseGroupRadio" value="" id="expenseClothesRadio">
+        <label class="form-check-label" for="expenseClothesRadio">Ubranie</label>
+      </li>
+      <li class="list-group-item">
+        <input class="form-check-input me-3" type="radio" name="expenseGroupRadio" value="" id="expenseHygieneRadio">
+        <label class="form-check-label" for="expenseHygieneRadio">Higiena</label>
+      </li>
+      <li class="list-group-item">
+        <input class="form-check-input me-3" type="radio" name="expenseGroupRadio" value="" id="expenseChildrenRadio">
+        <label class="form-check-label" for="expenseChildrenRadio">Dzieci</label>
+      </li>
+      <li class="list-group-item">
+        <input class="form-check-input me-3" type="radio" name="expenseGroupRadio" value="" id="expenseEntertainmentRadio">
+        <label class="form-check-label" for="expenseEntertainmentRadio">Rozrywka</label>
+      </li>
+      <li class="list-group-item">
+        <input class="form-check-input me-3" type="radio" name="expenseGroupRadio" value="" id="expenseTripRadio">
+        <label class="form-check-label" for="expenseTripRadio">Wycieczka</label>
+      </li>
+      <li class="list-group-item">
+        <input class="form-check-input me-3" type="radio" name="expenseGroupRadio" value="" id="expenseTrainingsRadio">
+        <label class="form-check-label" for="expenseTrainingsRadio">Szkolenia</label>
+      </li>
+      <li class="list-group-item">
+        <input class="form-check-input me-3" type="radio" name="expenseGroupRadio" value="" id="expenseBooksRadio">
+        <label class="form-check-label" for="expenseBooksRadio">Książki</label>
+      </li>
+      <li class="list-group-item">
+        <input class="form-check-input me-3" type="radio" name="expenseGroupRadio" value="" id="expenseSavingshRadio">
+        <label class="form-check-label" for="expenseSavingsRadio">Oszczędności</label>
+      </li>
+      <li class="list-group-item">
+        <input class="form-check-input me-3" type="radio" name="expenseGroupRadio" value="" id="expenseRetirementRadio">
+        <label class="form-check-label" for="expenseRetirementRadio">Na złotą jesień, czyli emeryturę</label>
+      </li>
+      <li class="list-group-item">
+        <input class="form-check-input me-3" type="radio" name="expenseGroupRadio" value="" id="expenseDeptsRadio">
+        <label class="form-check-label" for="expenseDeptsRadio">Spłata długów</label>
+      </li>
+      <li class="list-group-item">
+        <input class="form-check-input me-3" type="radio" name="expenseGroupRadio" value="" id="expenseDonationRadio">
+        <label class="form-check-label" for="expenseDonationRadio">Darowizna</label>
+      </li>
+      <li class="list-group-item">
+        <input class="form-check-input me-3" type="radio" name="expenseGroupRadio" value="" id="expenseOtherRadio">
+        <label class="form-check-label" for="expenseOtherRadio">Inne wydatki</label>
       </li>
     </ul>
 
