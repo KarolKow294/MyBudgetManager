@@ -30,25 +30,25 @@ body {
   font-weight: bold;
 }
 
-.feature-icon {
-  width: 4rem;
-  height: 4rem;
+.navbar-brand:hover {
+  color: rgb(121, 122, 122);
+}
+
+.icon-square {
+  width: 3rem;
+  height: 3rem;
   border-radius: 0.75rem;
   background-color: rgb(0, 112, 186);
   color: white;
 }
 
-#featured-3 > p {
+#hanging-icons > p {
   text-align: center;
 }
 
-#featured-3 span {
+#hanging-icons span {
   color: rgb(0, 112, 186);
   font-weight: bold;
-}
-
-.carousel-inner {
-  /*height: 560px*/
 }
 
 .registration-container, .login-container {
@@ -74,4 +74,114 @@ body {
 #data-confirmation-button:hover {
   background-color: #fff;
   color: rgb(0, 112, 186);
+}
+
+.nav-link.active {
+  font-weight: bold;
+  color: rgb(121, 122, 122) !important;
+}
+
+.number, thead {
+  color: rgb(0, 112, 186);
+}
+
+.short-description {
+  font-weight: bold;
+}
+
+.list-group-item {
+  width: 300px;
+}
+
+.form-check-input:checked {
+  background-color: rgb(0, 112, 186);
+  border-color: rgb(0, 112, 186);
+}
+
+.add-cancel-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+#add-button {
+  width: 140px;
+  background-color: rgb(0, 112, 186);
+}
+
+#add-button:hover {
+  background-color: #fff;
+  color: rgb(0, 112, 186);
+  border-color: rgb(0, 112, 186);
+}
+
+#cancel-button {
+  width: 140px;
+  background-color: rgb(208, 70, 70);
+  border-color: rgb(208, 70, 70);
+}
+
+#cancel-button:hover {
+  background-color: #fff;
+  color: rgb(208, 70, 70);
+}
+
+.dropdown-toggle, .dropdown-menu, .table-container h3 {
+  color: rgb(0, 0, 0, 0.65);
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  text-align: center;
+}
+
+.incomes-container, .expenses-container, .balance-container {
+  max-width: 800px;
+  border: 2px rgb(222, 226, 230) solid;
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+tbody {
+  border-top-color: rgb(121, 122, 122);
+}
+
+@media (min-width: 319px) and (max-width: 575px) {
+  .table-container {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .incomes-container, .expenses-container, .balance-container {
+    padding: 5px;
+  }
+}
+
+.sum {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: repeat(4, 1fr);
+}
+
+.first-sum-column {
+  text-align: end;
+}
+
+.green-text {
+  color: rgb(28, 167, 28) !important;
+}
+
+.piechart {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-image: conic-gradient(
+      blue 70deg, 
+      lightblue 0 235deg, 
+      purple 0);
 }
