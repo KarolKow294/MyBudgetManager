@@ -63,6 +63,10 @@ body {
   margin: 20px;
 }
 
+.input-group-text, .form-control {
+  border-radius: 25px;
+}
+
 .registration-container div {
   width: 300px;
 }
@@ -74,6 +78,7 @@ body {
 #data-confirmation-button {
   width: 300px;
   background-color: rgb(0, 112, 186);
+  border-radius: 25px;
 }
 
 #data-confirmation-button:hover {
