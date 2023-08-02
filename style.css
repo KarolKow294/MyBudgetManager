@@ -99,7 +99,7 @@ body {
   font-weight: bold;
 }
 
-.list-group-item {
+.form-select {
   width: 300px;
   border-radius: 25px;
 }
