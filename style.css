@@ -150,22 +150,31 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px;
   text-align: center;
+  margin-top: 20px;
 }
 
 .incomes-container, .expenses-container, .balance-container {
   max-width: 800px;
+  min-width: 600px;
   border: 2px rgb(222, 226, 230) solid;
   border-radius: 6px;
   padding: 20px;
   margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .balance-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.incomes-expenses-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 tbody {
@@ -203,13 +212,22 @@ tbody {
       purple 0);
 }
 
-@media (min-width: 319px) and (max-width: 575px) {
-  .table-container {
-    margin-left: 5px;
-    margin-right: 5px;
+@media (min-width: 850px) and (max-width: 1400px) {
+  .incomes-container, .expenses-container, .balance-container {
+    min-width: 800px;
   }
+}
 
+@media (min-width: 536px) and (max-width: 650px) {
   .incomes-container, .expenses-container, .balance-container {
     padding: 5px;
+    min-width: 495px;
+  }
+}
+
+@media (min-width: 200px) and (max-width: 535px) {
+  .incomes-container, .expenses-container, .balance-container {
+    padding: 5px;
+    min-width: 385px;
   }
 }
