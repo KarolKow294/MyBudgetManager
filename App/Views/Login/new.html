@@ -4,36 +4,13 @@
 
 {% block body %}
 
-    <h1>Log in</h1>
-    
-    <form action="/login/create" method="post">
-
-        <div>
-            <label for="inputEmail">Email address</label>
-            <input id="inputEmail" name="email" placeholder="Email address" value="{{ email }}" type="email" />
-        </div>
-        <div>
-            <label for="inputPassword">Password</label>
-            <input type="password" id="inputPassword" name="password" placeholder="Password" />
-        </div>
-        <div>
-            <label>
-                <input type="checkbox" name="remember_me" {% if remember_me %} checked="checked" {% endif %} /> Remember me
-            </label>
-        </div>
-
-        <button type="submit">Log in</button>
-        <a href="/password/forgot">Forgot password</a>
-
-    </form>
-
     <main>
         <div class="login-container">
           <header>
             <h2>Logowanie</h2>
           </header>
           
-          <form action="" method="post">
+          <form action="/login/create" method="post">
     
             <div class="input-group mb-3">
               <span class="input-group-text">
@@ -42,7 +19,7 @@
                   <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648Zm-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
                 </svg>
               </span>
-              <input type="email" class="form-control" placeholder="Email" aria-label="Email">
+              <input type="email" class="form-control" placeholder="Email" aria-label="Email" value="{{ email }}">
             </div>
     
             <div class="input-group mb-3">
@@ -53,10 +30,19 @@
               </span>
               <input type="password" class="form-control" placeholder="Hasło" aria-label="Hasło">
             </div>
+
+            <div class="form-check mb-3">
+              <input class="form-check-input" type="checkbox" name="remember_me" id="flexCheckDefault" {% if remember_me %} checked="checked" {% endif %}>
+              <label class="form-check-label" for="flexCheckDefault">Zapamnietaj mnie</label>
+            </div>
+
+            <button id="data-confirmation-button" class="btn btn-primary" type="submit">Zaloguj</button>
             
-            <a id="data-confirmation-button" class="btn btn-primary" href="./main.html" role="button">Zaloguj</a>
-          
           </form>
+
+          <div>
+            <p><a id="forgot-text" href="/password/forgot">Zapomniałeś hasła?</a> A może nie posiadasz jeszcze konta, <a id="registration-text" href="/signup/new">zarejestruj się.</a></p>
+          </div>
         </div>
       </main>
 
