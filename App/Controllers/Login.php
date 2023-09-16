@@ -22,7 +22,8 @@ class Login extends \Core\Controller {
 
       Flash::addMessage('Login successful');
 
-      $this->redirect(Auth::getReturnToPage());
+      //$this->redirect(Auth::getReturnToPage());
+      View::renderTemplate('Home/main.html');
     } else {
       Flash::addMessage('Login unsuccessful, please try again', Flash::WARNING);
 

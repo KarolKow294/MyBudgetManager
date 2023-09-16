@@ -46,13 +46,13 @@ body {
   text-align: center;
 }
 
-#registration-text {
+#registration-text, #login-text, #forgot-text {
   color: rgb(0, 112, 186);
   font-weight: bold;
   text-decoration: none;
 }
 
-#registration-text:hover {
+#registration-text:hover, #login-text:hover, #forgot-text:hover {
   text-decoration: underline;
 }
 
@@ -79,6 +79,7 @@ body {
   width: 300px;
   background-color: rgb(0, 112, 186);
   border-radius: 25px;
+  margin-bottom: 16px;
 }
 
 #data-confirmation-button:hover {
@@ -212,6 +213,14 @@ tbody {
       purple 0);
 }
 
+.messages {
+  text-align: center;
+}
+
+.errorMessages {
+  color: red;
+}
+
 @media (min-width: 850px) and (max-width: 1400px) {
   .incomes-container, .expenses-container, .balance-container {
     min-width: 800px;
@@ -231,20 +240,4 @@ tbody {
     min-width: 385px;
   }
 }
-
-.alert {
-  border: 1px solid #ccc;
-  padding: 6px;
-}
-
-.alert-info {
-  background-color: #d9edf7;
-}
-
-.alert-success {
-  background-color: #dff0d8;
-}
-
-.alert-warning {
-  background-color: #fcf8e3;
-}
+  

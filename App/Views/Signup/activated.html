@@ -4,8 +4,18 @@
 
 {% block body %}
 
-    <h1>Sign up</h1>
-
-    <p>Success! Your account is now active. You can now <a href="/login">log in</a>.</p>
+    <main>
+        <div class="registration-container">
+            <header>
+                <h2>Rejestracja</h2>
+            </header>
+        </div>
+    </main>
+    
+    <div class="messages">
+        <article>
+            <p>Twoje konto zostało aktywowane. Możesz teraz <a id="login-text" href="/login">zalogować się</a>.</p>
+        </article>
+    </div>
 
 {% endblock %}
