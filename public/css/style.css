@@ -213,6 +213,14 @@ tbody {
       purple 0);
 }
 
+.messages {
+  text-align: center;
+}
+
+.errorMessages {
+  color: red;
+}
+
 @media (min-width: 850px) and (max-width: 1400px) {
   .incomes-container, .expenses-container, .balance-container {
     min-width: 800px;
