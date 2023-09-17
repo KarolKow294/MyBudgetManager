@@ -47,6 +47,28 @@
         });
     </script>
 
+    <script>
+      jQuery.extend(jQuery.validator.messages, {
+        required: "To pole jest wymagane.",
+        remote: "Proszę popraw to pole.",
+        email: "Proszę wprowadzić prawidłowy adres email.",
+        url: "Proszę wprowadzić poprawny adres URL.",
+        date: "Proszę wprowadzić prawidłową datę.",
+        dateISO: "Proszę wprowadzić prawidłową datę (ISO).",
+        number: "Proszę wprowadzić prawidłową liczbę.",
+        digits: "Proszę wprowadzić tylko cyfry.",
+        creditcard: "Proszę wprowadzić prawidłowy numer karty.",
+        equalTo: "Proszę wprowadzić takie same wartości.",
+        accept: "Please enter a value with a valid extension.",
+        maxlength: jQuery.validator.format("Proszę wprowadzić nie więcej niż {0} znaków."),
+        minlength: jQuery.validator.format("Proszę wprowadzić nie mniej niż {0} znaków."),
+        rangelength: jQuery.validator.format("Proszę wprowadzić wartość pomiędzy {0} i {1} długości znaków."),
+        range: jQuery.validator.format("Proszę wprowadzić wartość pomiędzy {0} i {1}."),
+        max: jQuery.validator.format("Proszę wprowadzić wartość mniejszą lub równą {0}."),
+        min: jQuery.validator.format("Proszę wprowadzić wartość większą lub równą {0}.")
+      });
+    </script>
+
 {% endblock %}
 
 {% block body %}
