@@ -20,12 +20,12 @@ class Login extends \Core\Controller {
     if ($user) {
       Auth::login($user, $remember_me);
 
-      Flash::addMessage('Login successful');
+      Flash::addMessage('Logowanie powiodło się');
 
-      //$this->redirect(Auth::getReturnToPage());
-      View::renderTemplate('Budget/index.html');
+      $this->redirect(Auth::getReturnToPage());
+      //View::renderTemplate('Budget/index.html');
     } else {
-      Flash::addMessage('Login unsuccessful, please try again', Flash::WARNING);
+      Flash::addMessage('Logowanie nie powiodło się, spróbuj ponownie', Flash::WARNING);
 
       View::renderTemplate('Login/new.html', ['email' => $_POST['email'], 'remember_me' => $remember_me]);
     }
@@ -38,7 +38,7 @@ class Login extends \Core\Controller {
   }
 
   public function showLogoutMessageAction() {
-    Flash::addMessage('Logout successful');
+    Flash::addMessage('Wylogowano');
 
     $this->redirect('/');
   }

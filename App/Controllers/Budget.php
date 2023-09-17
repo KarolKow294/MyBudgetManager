@@ -5,7 +5,7 @@ namespace App\Controllers;
 use \Core\View;
 use \App\Auth;
 
-class Budget extends \Core\Controller {
+class Budget extends Authenticated {
     public function indexAction() {
         View::renderTemplate('Budget/index.html');
     }
