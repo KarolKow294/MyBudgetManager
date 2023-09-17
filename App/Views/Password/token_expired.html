@@ -4,8 +4,18 @@
 
 {% block body %}
 
-    <h1>Request password reset</h1>
-    
-    <p>Password reset link invalid or expired, please click <a href="/password/forgot">here</a> to request another one.</p>
+    <main>
+        <div class="profile-container">
+            <header>
+                <h2>Resetowanie hasła</h2>
+            </header>
+        </div>
+            
+        <div class="messages">
+            <article>
+                <p>Link do resetowania hasła jest nieprawidłowy lub wygasł, proszę kliknij <a id="forgot-text" href="/password/forgot">tutaj</a> aby wysłać ponowną prośbę.</p>
+            </article>
+        </div>
+    </main>
 
 {% endblock %}

@@ -65,10 +65,10 @@ class Router {
       } else {
         throw new \Exception("Controller class $controller not found");
       }
-      } else {
-        throw new \Exception('No route matched.', 404);
-      }
+    } else {
+      throw new \Exception('No route matched.', 404);
     }
+  }
 
   protected function convertToStudlyCaps($string) {
     return str_replace(' ', '', ucwords(str_replace('-', ' ', $string)));

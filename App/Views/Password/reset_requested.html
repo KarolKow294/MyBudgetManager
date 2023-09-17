@@ -1,11 +1,21 @@
 {% extends "base.html" %}
 
-{% block title %}Forgot password{% endblock %}
+{% block title %}Zapomniane hasło{% endblock %}
 
 {% block body %}
 
-    <h1>Request password reset</h1>
-    
-    <p>Please check your email</p>
+    <main>
+        <div class="profile-container">
+            <header>
+                <h2>Resetowanie hasła</h2>
+            </header>
+        </div>
+            
+        <div class="messages">
+            <article>
+                <p>Proszę sprawdź email aby zresetować hasło.</p>
+            </article>
+        </div>
+    </main>
 
 {% endblock %}
