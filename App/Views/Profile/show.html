@@ -4,15 +4,23 @@
 
 {% block body %}
 
-    <h1>Profile</h1>
+    <main>
+        <div class="profile-container">
+            <header>
+                <h2>Ustawienia profilu</h2>
+            </header>
+        </div>
 
-    <dl>
-        <dt>Name</dt>
-        <dd>{{ user.name }}</dd>
-        <dt>email</dt>
-        <dd>{{ user.email }}</dd>
-    </dl>
-
-    <a href="/profile/edit">Edit</a>
+        <div class="messages">
+            <article>
+                <dl>
+                    <dt>Imię</dt>
+                    <dd>{{ user.name }}</dd>
+                    <dt>Email</dt>
+                    <dd>{{ user.email }}</dd>
+                </dl>
+            </article>
+        </div>
+    </main>
 
 {% endblock %}

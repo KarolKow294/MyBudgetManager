@@ -1,11 +1,21 @@
 {% extends "base.html" %}
 
-{% block title %}Forgot password{% endblock %}
+{% block title %}Zapomniane hasło{% endblock %}
 
 {% block body %}
 
-    <h1>Password reset successfully</h1>
-    
-    <p>You can now <a href="/login">login</a>.</p>
+    <main>
+        <div class="profile-container">
+            <header>
+                <h2>Resetowanie hasła powiodło się</h2>
+            </header>
+        </div>
+            
+        <div class="messages">
+            <article>
+                <p>Możesz teraz <a id="forgot-text" href="/login">zalogować się</a>.</p>
+            </article>
+        </div>
+    </main>
 
 {% endblock %}

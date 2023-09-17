@@ -224,8 +224,9 @@ class User extends \Core\Model {
     }
   }
 
-  public function resetPassword($password) {
+  public function resetPassword($password, $repeatPassword) {
     $this->password = $password;
+    $this->repeatPassword = $repeatPassword;
 
     $this->validate();
 
@@ -281,6 +282,7 @@ class User extends \Core\Model {
     
     if ($data['password'] != '') {
       $this->password = $data['password'];
+      $this->repeatPassword = $data['repeatPassword'];
     }
 
     $this->validate();
