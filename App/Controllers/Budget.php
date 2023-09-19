@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use \Core\View;
 use \App\Auth;
+use \App\Models\Income;
 
 class Budget extends Authenticated {
     public function indexAction() {
@@ -20,5 +21,13 @@ class Budget extends Authenticated {
 
     public function currentMonthAction() {
         View::renderTemplate('Budget/currentMonth.html');
+    }
+
+    public function createIncomeAction() {
+        $income = new Income($_POST);
+    
+        $income->save();
+        
+        //var_dump($_POST);
     }
 }
