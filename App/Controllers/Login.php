@@ -23,7 +23,7 @@ class Login extends \Core\Controller {
       Flash::addMessage('Logowanie powiodło się');
 
       $this->redirect(Auth::getReturnToPage());
-      //View::renderTemplate('Budget/index.html');
+      
     } else {
       Flash::addMessage('Logowanie nie powiodło się, spróbuj ponownie', Flash::WARNING);
 

@@ -12,7 +12,7 @@ class User extends \Core\Model {
   public $name;
   public $email;
   public $password;
-  public $repeatPassword;
+  public $repeat_password;
   public $password_confirmation;
   public $password_hash;
   public $errors = [];
@@ -83,7 +83,7 @@ class User extends \Core\Model {
         $this->errors[] = 'Hasło musi zawierać co najmniej jedną liczbę';
       }
 
-      if ($this->password != $this->repeatPassword) {
+      if ($this->password != $this->repeat_password) {
         $this->errors[] = 'Proszę wprowadzić takie same hasła';
       }
     }
@@ -224,9 +224,9 @@ class User extends \Core\Model {
     }
   }
 
-  public function resetPassword($password, $repeatPassword) {
+  public function resetPassword($password, $repeat_password) {
     $this->password = $password;
-    $this->repeatPassword = $repeatPassword;
+    $this->repeat_password = $repeat_password;
 
     $this->validate();
 
@@ -314,5 +314,19 @@ class User extends \Core\Model {
       return $stmt->execute();
     }
     return false;
+  }
+
+  public function getId() {
+    $sql = 'SELECT id FROM users WHERE email = :email';
+
+    $db = static::getDB();
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam('email', $this->email, PDO::PARAM_STR);
+
+    $stmt->execute();
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $result['id'];
   }
 }

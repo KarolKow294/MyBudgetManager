@@ -29,7 +29,7 @@ class Password extends \Core\Controller {
 
         $user = $this->getUserOrExit($token);
 
-        if ($user->resetPassword($_POST['password'], $_POST['repeatPassword'])) {
+        if ($user->resetPassword($_POST['password'], $_POST['repeat_password'])) {
             View::renderTemplate('Password/reset_success.html');
         } else {
             View::renderTemplate('Password/reset.html', ['token' => $token, 'user' => $user]);
