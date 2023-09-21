@@ -39,10 +39,9 @@
             </svg>
           </span>
           <select class="form-select" name="income_category_assigned_to_user_id" aria-label="Income Select Groupe" required>
-            <option value="1" selected>Wynagrodzenie</option>
-            <option value="2">Odsetki bankowe</option>
-            <option value="3">Sprzedaż na allegro</option>
-            <option value="4">Inne</option>
+            {% for key, category in income_categories %}
+              <option value="{{ key }}">{{ category }}</option>
+            {% endfor %}
           </select>
         </div>
 

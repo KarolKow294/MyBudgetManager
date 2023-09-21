@@ -6,6 +6,7 @@ use \App\Models\User;
 use \App\Auth;
 use \Core\View;
 use \App\Flash;
+use \App\Models\IncomeCategory;
 
 class Login extends \Core\Controller {
   public function newAction() {
@@ -19,6 +20,8 @@ class Login extends \Core\Controller {
 
     if ($user) {
       Auth::login($user, $remember_me);
+
+      //IncomeCategory::fetchCategoriesAssignedToUser($user->id);
 
       Flash::addMessage('Logowanie powiodło się');
 
