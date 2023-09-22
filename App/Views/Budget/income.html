@@ -53,13 +53,17 @@
         <h2>Wprowadz dane:</h2>
       </header>
 
+      {% if income.success == 'true' %}
+          <p class="green-text">Przychód na kwotę {{ income.amount }} zł z dnia {{ income.date_of_income }} został dodany</p>
+      {% endif %}
+
       {% if income.errors is not empty %}
-            <ul class="errorMessages">
-                {% for error in income.errors %}
-                    <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
-          {% endif %}
+          <ul class="errorMessages">
+              {% for error in income.errors %}
+                  <li>{{ error }}</li>
+              {% endfor %}
+          </ul>
+      {% endif %}
       
       <form action="/budget/income/create" method="post" id="formIncome">
 

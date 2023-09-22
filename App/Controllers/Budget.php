@@ -27,7 +27,7 @@ class Budget extends Authenticated {
         $income = new Income($_POST);
     
         if ($income->save()) {
-            View::renderTemplate('Budget/income.html', ['success' => $income]);
+            View::renderTemplate('Budget/income.html', ['income' => $income]);
         } else {
             View::renderTemplate('Budget/income.html', ['income' => $income]);
         }

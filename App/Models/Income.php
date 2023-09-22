@@ -8,11 +8,12 @@ use \App\Auth;
 use DateTime;
 
 class Income extends \Core\Model {
-    private $income_category_assigned_to_user_id;
-    private $amount;
-    private $date_of_income;
-    private $income_comment;
+    public $income_category_assigned_to_user_id;
+    public $amount;
+    public $date_of_income;
+    public $income_comment;
     public $errors = [];
+    public $success;
 
     
     public function __construct($data = []) {
@@ -40,6 +41,8 @@ class Income extends \Core\Model {
             $stmt->bindValue(':amount', $this->amount, PDO::PARAM_STR);
             $stmt->bindValue(':date_of_income', date('Y-m-d', $convertedDate), PDO::PARAM_STR);
             $stmt->bindValue(':income_comment', $this->income_comment, PDO::PARAM_STR);
+
+            $this->success = true;
 
             return $stmt->execute();
         }
