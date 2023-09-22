@@ -17,7 +17,7 @@ class View {
 
   public static function renderTemplate($template, $args = []) {
     echo static::getTemplate($template, $args);
-    }
+  }
 
   public static function getTemplate($template, $args = []) {
     static $twig = null;
@@ -28,8 +28,8 @@ class View {
       $twig->addGlobal('current_user', \App\Auth::getUser());
       $twig->addGlobal('flash_messages', \App\Flash::getMessages());
       $twig->addGlobal('income_categories', \App\Auth::getIncomeCategories());
-      }
+    }
 
       return $twig->render($template, $args);
-    }
+  }
 }

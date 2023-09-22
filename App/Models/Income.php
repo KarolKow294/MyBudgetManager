@@ -4,12 +4,15 @@ namespace App\Models;
 
 use PDO;
 use \Core\View;
+use \App\Auth;
+use DateTime;
 
 class Income extends \Core\Model {
     private $income_category_assigned_to_user_id;
     private $amount;
     private $date_of_income;
     private $income_comment;
+    public $errors = [];
 
     
     public function __construct($data = []) {
@@ -44,11 +47,40 @@ class Income extends \Core\Model {
     }
     
     public function validate() {
-        if ($this->amount == '') {
+        if ($this->amount != '') {
+            if (! preg_match("/^-?[0-9]+(?:\.[0-9]{1,2})?$/", $this->amount)) {
+                $this->errors[] = 'Wprowadź prawidłową kwotę';
+            }
+        } else {
             $this->errors[] = 'Kwota jest wymagana';
         }
+        
+        if ($this->date_of_income != '') {
+            $date = date_create_from_format('Y-m-d', $this->date_of_income);
+            
+            if ($date === false) {
+                $this->errors[] = 'Data musi być w formacie YYYY-MM-DD';
+            }
+        } else {
+            $this->errors[] = 'Data jest wymagana';
+        }
+        
+        if ($this->income_category_assigned_to_user_id != '') {
+            $categories = Auth::getIncomeCategories();
 
+            $correct_category = false;
 
-
+            foreach ($categories as $key => $category) {
+                if ($key == $this->income_category_assigned_to_user_id) {
+                    $correct_category = true;
+                    break;
+                }
+            }
+            if ($correct_category == false) {
+                $this->errors[] = 'Categoria jest inna niż przypisana do użytkownika';
+            }
+        } else {
+            $this->errors[] = 'Categoria jest wymagana';
+        }
     }
 }

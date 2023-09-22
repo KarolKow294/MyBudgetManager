@@ -21,8 +21,6 @@ class Login extends \Core\Controller {
     if ($user) {
       Auth::login($user, $remember_me);
 
-      //IncomeCategory::fetchCategoriesAssignedToUser($user->id);
-
       Flash::addMessage('Logowanie powiodło się');
 
       $this->redirect(Auth::getReturnToPage());

@@ -72,7 +72,7 @@ class User extends \Core\Model {
 
     if (isset($this->password)) {
       if (strlen($this->password) < 6) {
-        $this->errors[] = 'Proszę wprowadzić hasło zawierające co najmniej 6 zanków';
+        $this->errors[] = 'Proszę wprowadzić hasło zawierające co najmniej 6 znaków';
       }
 
       if (preg_match('/.*[a-z]+.*/i', $this->password) == 0) {

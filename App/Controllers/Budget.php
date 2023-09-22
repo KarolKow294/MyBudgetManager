@@ -26,8 +26,10 @@ class Budget extends Authenticated {
     public function createIncomeAction() {
         $income = new Income($_POST);
     
-        $income->save();
-        
-        var_dump($_POST);
+        if ($income->save()) {
+            View::renderTemplate('Budget/income.html', ['success' => $income]);
+        } else {
+            View::renderTemplate('Budget/income.html', ['income' => $income]);
+        }
     }
 }
