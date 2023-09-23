@@ -5,6 +5,7 @@ namespace App\Controllers;
 use \Core\View;
 use \App\Auth;
 use \App\Models\Income;
+use \App\Models\Expense;
 
 class Budget extends Authenticated {
     public function indexAction() {
@@ -30,6 +31,16 @@ class Budget extends Authenticated {
             View::renderTemplate('Budget/income.html', ['income' => $income]);
         } else {
             View::renderTemplate('Budget/income.html', ['income' => $income]);
+        }
+    }
+
+    public function createExpenseAction() {
+        $expense = new Expense($_POST);
+    
+        if ($expense->save()) {
+            View::renderTemplate('Budget/expense.html', ['income' => $expense]);
+        } else {
+            View::renderTemplate('Budget/expense.html', ['income' => $expense]);
         }
     }
 }

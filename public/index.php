@@ -17,6 +17,7 @@ $router->add('login', ['controller' => 'Login', 'action' => 'new']);
 $router->add('logout', ['controller' => 'Login', 'action' => 'destroy']);
 $router->add('budget', ['controller' => 'Budget', 'action' => 'index']);
 $router->add('budget/income/create', ['controller' => 'Budget', 'action' => 'createIncome']);
+$router->add('budget/expense/create', ['controller' => 'Budget', 'action' => 'createExpense']);
 $router->add('password/reset/{token:[\da-f]+}', ['controller' => 'Password', 'action' => 'reset']);
 $router->add('signup/activate/{token:[\da-f]+}', ['controller' => 'Signup', 'action' => 'activate']);
 $router->add('{controller}/{action}');
