@@ -27,20 +27,16 @@ class Budget extends Authenticated {
     public function createIncomeAction() {
         $income = new Income($_POST);
     
-        if ($income->save()) {
-            View::renderTemplate('Budget/income.html', ['income' => $income]);
-        } else {
-            View::renderTemplate('Budget/income.html', ['income' => $income]);
-        }
+        $income->save();
+
+        View::renderTemplate('Budget/income.html', ['income' => $income]);
     }
 
     public function createExpenseAction() {
         $expense = new Expense($_POST);
     
-        if ($expense->save()) {
-            View::renderTemplate('Budget/expense.html', ['income' => $expense]);
-        } else {
-            View::renderTemplate('Budget/expense.html', ['income' => $expense]);
-        }
+        $expense->save();
+
+        View::renderTemplate('Budget/expense.html', ['expense' => $expense]);
     }
 }

@@ -6,6 +6,7 @@ use \App\Models\User;
 use \App\Models\RememberedLogin;
 use \App\Models\IncomeCategory;
 use \App\Models\ExpenseCategory;
+use \App\Models\PaymentMethod;
 
 class Auth {
     public static function login($user, $remember_me) {
@@ -95,6 +96,14 @@ class Auth {
     public static function getExpenseCategories() {
         if (isset($_SESSION['user_id'])) {
             return ExpenseCategory::fetchCategoriesAssignedToUser($_SESSION['user_id']);
+        } else {
+            //return static::loginFromRememberCookie();
+        }
+    }
+
+    public static function getPaymentMethods() {
+        if (isset($_SESSION['user_id'])) {
+            return PaymentMethod::fetchMethodsAssignedToUser($_SESSION['user_id']);
         } else {
             //return static::loginFromRememberCookie();
         }

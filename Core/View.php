@@ -29,6 +29,7 @@ class View {
       $twig->addGlobal('flash_messages', \App\Flash::getMessages());
       $twig->addGlobal('income_categories', \App\Auth::getIncomeCategories());
       $twig->addGlobal('expense_categories', \App\Auth::getExpenseCategories());
+      $twig->addGlobal('payment_methods', \App\Auth::getPaymentMethods());
     }
 
       return $twig->render($template, $args);

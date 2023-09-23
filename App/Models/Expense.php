@@ -31,14 +31,15 @@ class Expense extends \Core\Model {
         if (empty($this->errors)) {
             $convertedDate = strtotime($this->date_of_expense);
             
-            $sql = 'INSERT INTO expenses (user_id, expense_category_assigned_to_user_id, amount, date_of_expense, expense_comment)
-                    VALUES (:user_id, :expense_category_assigned_to_user_id, :amount, :date_of_expense, :expense_comment)';
+            $sql = 'INSERT INTO expenses (user_id, expense_category_assigned_to_user_id, payment_method_assigned_to_user_id, amount, date_of_expense, expense_comment)
+                    VALUES (:user_id, :expense_category_assigned_to_user_id, :payment_method_assigned_to_user_id, :amount, :date_of_expense, :expense_comment)';
 
             $db = static::getDB();
             $stmt = $db->prepare($sql);
 
             $stmt->bindValue(':user_id', $user_id, PDO::PARAM_STR);
             $stmt->bindValue(':expense_category_assigned_to_user_id', $this->expense_category_assigned_to_user_id, PDO::PARAM_STR);
+            $stmt->bindValue(':payment_method_assigned_to_user_id', $this->payment_method_assigned_to_user_id, PDO::PARAM_STR);
             $stmt->bindValue(':amount', $this->amount, PDO::PARAM_STR);
             $stmt->bindValue(':date_of_expense', date('Y-m-d', $convertedDate), PDO::PARAM_STR);
             $stmt->bindValue(':expense_comment', $this->expense_comment, PDO::PARAM_STR);

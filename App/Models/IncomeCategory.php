@@ -5,9 +5,7 @@ namespace App\Models;
 use PDO;
 use \Core\View;
 
-class IncomeCategory extends \Core\Model {
-    public $categories = [];
-    
+class IncomeCategory extends \Core\Model {    
     public static function copyDefaultCategories($user_id) {
         $sql = 'INSERT INTO incomes_category_assigned_to_users (name, user_id)
                 SELECT incomes_category_default.name, :user_id
