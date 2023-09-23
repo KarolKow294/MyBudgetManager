@@ -26,34 +26,22 @@
                 </tr>
               </thead>
               <tbody class="table-group-divider">
-                <tr>
-                  <th scope="row" class="number">1</th>
-                  <td>Wynagrodzenie</td>
-                  <td>2023-04-05</td>
-                  <td>5000 zł</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <th scope="row" class="number">2</th>
-                  <td>Sprzedaż na allegro</td>
-                  <td>2023-04-11</td>
-                  <td>2000 zł</td>
-                  <td>Telefon</td>
-                </tr>
-                <tr>
-                  <th scope="row" class="number">3</th>
-                  <td>Odsetki bankowe</td>
-                  <td>2023-04-20</td>
-                  <td>20 zł</td>
-                  <td>mBank</td>
-                </tr>
+                {% for income in incomes %}
+                  <tr>
+                    <th scope="row" class="number">{{ loop.index }}</th>
+                    <td>{{ income.name }}</td>
+                    <td>{{ income.date_of_income }}</td>
+                    <td>{{ income.amount }}</td>
+                    <td>{{ income.income_comment }}</td>
+                  </tr>
+                {% endfor %}
               </tbody>
             </table>
             <div class="sum">
-              <p class="first-sum-column">Suma wynagrodzenie:</p><p class="secound-sum-column">5000 zł</p>
-              <p class="first-sum-column">Suma sprzedaż na allegro:</p><p class="secound-sum-column">2000 zł</p>
-              <p class="first-sum-column">Suma odsetki bankowe:</p><p class="secound-sum-column">20 zł</p>
-              <p class="first-sum-column">Suma przychodów:</p><p class="secound-sum-column">7020 zł</p>
+              {% for total_income in total_incomes %}
+                  <p class="first-sum-column">Suma {{ total_income.name }}:</p><p class="secound-sum-column">{{ total_income.total_income }} zł</p>
+              {% endfor %}
+              <p class="first-sum-column">Suma przychodów:</p><p class="secound-sum-column">{{ sum_of_incomes }} zł</p>
             </div>
           </div>
         </section>

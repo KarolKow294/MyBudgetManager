@@ -7,6 +7,7 @@ use \App\Models\RememberedLogin;
 use \App\Models\IncomeCategory;
 use \App\Models\ExpenseCategory;
 use \App\Models\PaymentMethod;
+use \App\Models\Balance;
 
 class Auth {
     public static function login($user, $remember_me) {

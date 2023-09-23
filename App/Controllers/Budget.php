@@ -6,8 +6,16 @@ use \Core\View;
 use \App\Auth;
 use \App\Models\Income;
 use \App\Models\Expense;
+use \App\Models\Balance;
 
 class Budget extends Authenticated {
+    private $user;
+
+    protected function before() {
+        parent::before();
+        $this->user = Auth::getUser();
+    }
+    
     public function indexAction() {
         View::renderTemplate('Budget/index.html');
     }
@@ -21,7 +29,12 @@ class Budget extends Authenticated {
     }
 
     public function currentMonthAction() {
-        View::renderTemplate('Budget/currentMonth.html');
+        $incomes = Balance::fetchIncomesByDate($this->user->id);
+        $total_incomes = Balance::fetchTotalIncomesByCategoryAndDate($this->user->id);
+
+        $sum_of_incomes = $this->sumOfAmounts($total_incomes);
+
+        View::renderTemplate('Budget/currentMonth.html', ['incomes' => $incomes, 'total_incomes' => $total_incomes, 'sum_of_incomes' => $sum_of_incomes]);
     }
 
     public function createIncomeAction() {
@@ -38,5 +51,14 @@ class Budget extends Authenticated {
         $expense->save();
 
         View::renderTemplate('Budget/expense.html', ['expense' => $expense]);
+    }
+
+    private function sumOfAmounts($total_incomes) {
+        $sum = 0;
+
+        foreach ($total_incomes as $total_income_category) {
+            $sum += $total_income_category['total_income'];
+        }
+        return $sum;
     }
 }
