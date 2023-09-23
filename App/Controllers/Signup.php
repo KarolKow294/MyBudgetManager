@@ -5,6 +5,8 @@ namespace App\Controllers;
 use \Core\View;
 use \App\Models\User;
 use \App\Models\IncomeCategory;
+use \App\Models\ExpenseCategory;
+use \App\Models\PaymentMethod;
 
 class Signup extends \Core\Controller {
   public function newAction() {
@@ -16,6 +18,8 @@ class Signup extends \Core\Controller {
 
     if ($user->save()) {
       IncomeCategory::copyDefaultCategories($user->getId());
+      ExpenseCategory::copyDefaultCategories($user->getId());
+      PaymentMethod::copyDefaultMethods($user->getId());
 
       $user->sendActivationEmail();
       

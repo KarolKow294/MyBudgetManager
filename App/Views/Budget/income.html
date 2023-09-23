@@ -58,7 +58,7 @@
       {% endif %}
 
       {% if income.errors is not empty %}
-          <ul class="errorMessages">
+          <ul class="errorMessages list-unstyled">
               {% for error in income.errors %}
                   <li>{{ error }}</li>
               {% endfor %}
@@ -111,7 +111,7 @@
 
         <div class="add-cancel-buttons">
           <button id="add-button" class="btn btn-primary" type="submit">Dodaj</button>
-          <a id="cancel-button" class="btn btn-primary" href="#" role="button">Anuluj</a>
+          <a id="cancel-button" class="btn btn-primary" href="/budget/income" role="button">Anuluj</a>
         </div>
 
       </form>
