@@ -87,5 +87,23 @@ class Expense extends \Core\Model {
         } else {
             $this->errors[] = 'Categoria jest wymagana';
         }
+
+        if ($this->payment_method_assigned_to_user_id != '') {
+            $methods = Auth::getPaymentMethods();
+
+            $correct_method = false;
+
+            foreach ($methods as $key => $method) {
+                if ($key == $this->payment_method_assigned_to_user_id) {
+                    $correct_method = true;
+                    break;
+                }
+            }
+            if ($correct_method == false) {
+                $this->errors[] = 'Metoda płatności jest inna niż przypisana do użytkownika';
+            }
+        } else {
+            $this->errors[] = 'Metoda płatności jest wymagana';
+        }
     }
 }

@@ -58,7 +58,7 @@
       {% endif %}
 
       {% if income.errors is not empty %}
-          <ul class="errorMessages">
+          <ul class="errorMessages list-unstyled">
               {% for error in income.errors %}
                   <li>{{ error }}</li>
               {% endfor %}
