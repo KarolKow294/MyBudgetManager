@@ -6,6 +6,7 @@ use \App\Models\User;
 use \App\Auth;
 use \Core\View;
 use \App\Flash;
+use \App\Models\IncomeCategory;
 
 class Login extends \Core\Controller {
   public function newAction() {
@@ -23,7 +24,7 @@ class Login extends \Core\Controller {
       Flash::addMessage('Logowanie powiodło się');
 
       $this->redirect(Auth::getReturnToPage());
-      //View::renderTemplate('Budget/index.html');
+      
     } else {
       Flash::addMessage('Logowanie nie powiodło się, spróbuj ponownie', Flash::WARNING);
 

@@ -4,6 +4,7 @@ namespace App;
 
 use \App\Models\User;
 use \App\Models\RememberedLogin;
+use \App\Models\IncomeCategory;
 
 class Auth {
     public static function login($user, $remember_me) {
@@ -79,6 +80,14 @@ class Auth {
             }
 
             setcookie('remember_me', '', time() - 3600);
+        }
+    }
+
+    public static function getIncomeCategories() {
+        if (isset($_SESSION['user_id'])) {
+            return IncomeCategory::fetchCategoriesAssignedToUser($_SESSION['user_id']);
+        } else {
+            //return static::loginFromRememberCookie();
         }
     }
 }

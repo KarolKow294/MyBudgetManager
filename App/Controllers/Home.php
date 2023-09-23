@@ -7,6 +7,10 @@ use \App\Auth;
 
 class Home extends \Core\Controller {
     public function indexAction() {
-      View::renderTemplate('Home/index.html');
+      if (isset($_SESSION['user_id'])) {
+        View::renderTemplate('Budget/index.html');
+      } else {
+        View::renderTemplate('Home/index.html');
+      } 
     }
 }

@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use \Core\View;
 use \App\Models\User;
+use \App\Models\IncomeCategory;
 
 class Signup extends \Core\Controller {
   public function newAction() {
@@ -14,6 +15,8 @@ class Signup extends \Core\Controller {
     $user = new User($_POST);
 
     if ($user->save()) {
+      IncomeCategory::copyDefaultCategories($user->getId());
+
       $user->sendActivationEmail();
       
       $this->redirect('/signup/success');
