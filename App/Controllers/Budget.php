@@ -78,9 +78,21 @@ class Budget extends Authenticated {
 
             $sum_of_incomes = $this->sumOfAmounts($total_incomes);
             $sum_of_expenses = $this->sumOfAmounts($total_expenses);
-        
 
-        View::renderTemplate('Budget/balance.html', ['incomes' => $incomes, 'total_incomes' => $total_incomes, 'sum_of_incomes' => $sum_of_incomes, 'expenses' => $expenses, 'total_expenses' => $total_expenses, 'sum_of_expenses' => $sum_of_expenses, 'title' => $title, 'date_errors' => $this->errors]);
+            $balance = $sum_of_incomes - $sum_of_expenses;
+
+            $expense_name_array = [];
+            $expense_amount_array = [];
+            $i = 0;
+
+            //temporary array
+            foreach ( $total_expenses as $temporary_array ) {
+                $expense_name_array[$i] = $temporary_array['name'];
+                $expense_amount_array[$i] = $temporary_array['total_amount_by_category'];
+                $i++;
+            }
+
+            View::renderTemplate('Budget/balance.html', ['incomes' => $incomes, 'total_incomes' => $total_incomes, 'sum_of_incomes' => $sum_of_incomes, 'expenses' => $expenses, 'total_expenses' => $total_expenses, 'sum_of_expenses' => $sum_of_expenses, 'balance' => $balance, 'title' => $title, 'date_errors' => $this->errors, 'expense_name_array' => $expense_name_array, 'expense_amount_array' => $expense_amount_array]);
 
         } else {
             View::renderTemplate('Budget/balance.html', ['title' => $title, 'date_errors' => $this->errors]);
