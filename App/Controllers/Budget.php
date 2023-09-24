@@ -10,6 +10,7 @@ use \App\Models\Balance;
 
 class Budget extends Authenticated {
     private $user;
+    public $errors = [];
 
     protected function before() {
         parent::before();
@@ -55,17 +56,35 @@ class Budget extends Authenticated {
         $this->sendDataToBalanceView($start_date, $end_date, $title);
     }
 
+    public function selectedPeriodAction() {
+        $start_date = $_GET['start_date'];
+        $end_date = $_GET['end_date'];
+
+        $title = $start_date . ' ÷ ' . $end_date;
+        
+        $this->sendDataToBalanceView($start_date, $end_date, $title);
+    }
+
     private function sendDataToBalanceView($start_date, $end_date, $title) {
-        $incomes = Balance::fetchIncomesByDate($this->user->id, $start_date, $end_date);
-        $total_incomes = Balance::fetchTotalIncomesByCategoryAndDate($this->user->id, $start_date, $end_date);
+        $this->validateDate($start_date, $end_date);
 
-        $expenses = Balance::fetchExpensesByDate($this->user->id, $start_date, $end_date);
-        $total_expenses = Balance::fetchTotalExpensesByCategoryAndDate($this->user->id, $start_date, $end_date);
+        if (empty($this->errors)) {
+            
+            $incomes = Balance::fetchIncomesByDate($this->user->id, $start_date, $end_date);
+            $total_incomes = Balance::fetchTotalIncomesByCategoryAndDate($this->user->id, $start_date, $end_date);
 
-        $sum_of_incomes = $this->sumOfAmounts($total_incomes);
-        $sum_of_expenses = $this->sumOfAmounts($total_expenses);
+            $expenses = Balance::fetchExpensesByDate($this->user->id, $start_date, $end_date);
+            $total_expenses = Balance::fetchTotalExpensesByCategoryAndDate($this->user->id, $start_date, $end_date);
 
-        View::renderTemplate('Budget/balance.html', ['incomes' => $incomes, 'total_incomes' => $total_incomes, 'sum_of_incomes' => $sum_of_incomes, 'expenses' => $expenses, 'total_expenses' => $total_expenses, 'sum_of_expenses' => $sum_of_expenses, 'title' => $title]);
+            $sum_of_incomes = $this->sumOfAmounts($total_incomes);
+            $sum_of_expenses = $this->sumOfAmounts($total_expenses);
+        
+
+        View::renderTemplate('Budget/balance.html', ['incomes' => $incomes, 'total_incomes' => $total_incomes, 'sum_of_incomes' => $sum_of_incomes, 'expenses' => $expenses, 'total_expenses' => $total_expenses, 'sum_of_expenses' => $sum_of_expenses, 'title' => $title, 'date_errors' => $this->errors]);
+
+        } else {
+            View::renderTemplate('Budget/balance.html', ['title' => $title, 'date_errors' => $this->errors]);
+        }
     }
 
     public function createIncomeAction() {
@@ -91,5 +110,32 @@ class Budget extends Authenticated {
             $sum += $total['total_amount_by_category'];
         }
         return $sum;
+    }
+
+    private function validateDate($start_date, $end_date) {
+
+        if ($start_date != '') {
+            $date = date_create_from_format('Y-m-d', $start_date);
+            
+            if ($date === false) {
+                $this->errors[] = 'Data startowa musi być w formacie YYYY-MM-DD';
+            }
+        } else {
+            $this->errors[] = 'Data startowa jest wymagana';
+        }
+
+        if ($end_date != '') {
+            $date = date_create_from_format('Y-m-d', $end_date);
+            
+            if ($date === false) {
+                $this->errors[] = 'Data końcowa musi być w formacie YYYY-MM-DD';
+            }
+        } else {
+            $this->errors[] = 'Data końcowa jest wymagana';
+        }
+
+        if (strtotime($start_date) > strtotime($end_date)) {
+            $this->errors[] = 'Data końcowa jest wcześniejsza niż startowa';
+        }
     }
 }

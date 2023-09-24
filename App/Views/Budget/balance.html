@@ -14,20 +14,22 @@
       <div class="table-container container">
 
         {% if title == 'current month' %}
-          <h2>Bieżący Miesiąc:</h2>
+          <h2>Bieżący Miesiąc</h2>
         {% elseif title == 'previous month' %}
-          <h2>Poprzedni Miesiąc:</h2>
+          <h2>Poprzedni Miesiąc</h2>
         {% elseif title == 'current year' %}
-          <h2>Bieżący rok:</h2>
+          <h2>Bieżący rok</h2>
+        {% else %}
+          <h2>Wybrany zakres {{ title }}</h2>
         {% endif %}
 
-      {% if income.errors is not empty %}
-          <ul class="errorMessages list-unstyled">
-              {% for error in income.errors %}
-                  <li>{{ error }}</li>
-              {% endfor %}
-          </ul>
-      {% endif %}
+        {% if date_errors is not empty %}
+            <ul class="errorMessages list-unstyled">
+                {% for error in date_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
 
         <div class="incomes-expenses-container">
         <section>
