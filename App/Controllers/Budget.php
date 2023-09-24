@@ -29,12 +29,43 @@ class Budget extends Authenticated {
     }
 
     public function currentMonthAction() {
-        $incomes = Balance::fetchIncomesByDate($this->user->id);
-        $total_incomes = Balance::fetchTotalIncomesByCategoryAndDate($this->user->id);
+        $title = 'current month';
+
+        $start_date = date('Y-m') . '-01';
+        $end_date = date('Y-m-t');
+        
+        $this->sendDataToBalanceView($start_date, $end_date, $title);
+    }
+
+    public function previousMonthAction() {
+        $title = 'previous month';
+
+        $start_date = date('Y-m-d', strtotime('first day of last month'));
+        $end_date = date('Y-m-d', strtotime('last day of last month'));
+        
+        $this->sendDataToBalanceView($start_date, $end_date, $title);
+    }
+
+    public function currentYearAction() {
+        $title = 'current year';
+
+        $start_date = date('Y') . '-01-01';
+        $end_date = date('Y') . '-12-31';
+        
+        $this->sendDataToBalanceView($start_date, $end_date, $title);
+    }
+
+    private function sendDataToBalanceView($start_date, $end_date, $title) {
+        $incomes = Balance::fetchIncomesByDate($this->user->id, $start_date, $end_date);
+        $total_incomes = Balance::fetchTotalIncomesByCategoryAndDate($this->user->id, $start_date, $end_date);
+
+        $expenses = Balance::fetchExpensesByDate($this->user->id, $start_date, $end_date);
+        $total_expenses = Balance::fetchTotalExpensesByCategoryAndDate($this->user->id, $start_date, $end_date);
 
         $sum_of_incomes = $this->sumOfAmounts($total_incomes);
+        $sum_of_expenses = $this->sumOfAmounts($total_expenses);
 
-        View::renderTemplate('Budget/currentMonth.html', ['incomes' => $incomes, 'total_incomes' => $total_incomes, 'sum_of_incomes' => $sum_of_incomes]);
+        View::renderTemplate('Budget/balance.html', ['incomes' => $incomes, 'total_incomes' => $total_incomes, 'sum_of_incomes' => $sum_of_incomes, 'expenses' => $expenses, 'total_expenses' => $total_expenses, 'sum_of_expenses' => $sum_of_expenses, 'title' => $title]);
     }
 
     public function createIncomeAction() {
@@ -53,11 +84,11 @@ class Budget extends Authenticated {
         View::renderTemplate('Budget/expense.html', ['expense' => $expense]);
     }
 
-    private function sumOfAmounts($total_incomes) {
+    private function sumOfAmounts($totals) {
         $sum = 0;
 
-        foreach ($total_incomes as $total_income_category) {
-            $sum += $total_income_category['total_income'];
+        foreach ($totals as $total) {
+            $sum += $total['total_amount_by_category'];
         }
         return $sum;
     }
