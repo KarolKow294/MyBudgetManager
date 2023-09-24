@@ -86,9 +86,9 @@
               </a>
               <ul class="dropdown-menu me-auto">
                 <li><a class="dropdown-item" href="/Budget/currentMonth">Bieżący miesiąc</a></li>
-                <li><a class="dropdown-item" href="#">Poprzedni miesiąc</a></li>
-                <li><a class="dropdown-item" href="#">Bieżący rok</a></li>
-                <li><a class="dropdown-item" href="#">Niestandardowy</a></li>
+                <li><a class="dropdown-item" href="/Budget/previousMonth">Poprzedni miesiąc</a></li>
+                <li><a class="dropdown-item" href="/Budget/currentYear">Bieżący rok</a></li>
+                <li><button type="button" class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#customDate">Niestandardowy</button></li>
               </ul>
             </li>
           {% endif %}
@@ -108,6 +108,32 @@
       {{ message.body }}
     </div>
   {% endfor %}
+
+    <!-- Modal -->
+    <div class="modal fade" id="customDate" tabindex="-1" aria-labelledby="customDateLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Wybierz zakres dat:</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <form action="/budget/selectedPeriod" method="get" id="formDate">
+            <div class="modal-body">
+                <div class="input-group mb-3">  
+                  <input type="date" name="start_date" class="form-control" placeholder="Data startowa (rrrr-mm-dd)" aria-label="Data" required>
+                  <input type="date" name="end_date" class="form-control" placeholder="Data końcowa (rrrr-mm-dd)" aria-label="Data" required>
+                </div> 
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="cancel-button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+              <button type="submit" id="add-button" class="btn btn-primary">Zatwierdź</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
 
   {% block body %}
   {% endblock %}
