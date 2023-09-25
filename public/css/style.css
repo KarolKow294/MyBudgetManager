@@ -213,18 +213,30 @@ tbody {
   color: red !important;
 }
 
-#piechart > div {
-  left: 30px;
+#piechart {
+  height: 400px;
+  width: 600px;
 }
 
-#piechart svg {
-  width: 500px;
-  height: 350px;
+#piechart > div {
+  left: 30px !important;
 }
 
 @media (min-width: 850px) and (max-width: 1400px) {
   .incomes-container, .expenses-container, .balance-container {
     min-width: 800px;
+  }
+
+  #piechart {
+    height: 400px;
+    width: 600px;
+  }
+}
+
+@media (min-width: 651px) and (max-width: 849px) {
+  #piechart {
+    height: 350px;
+    width: 500px;
   }
 }
 
@@ -233,12 +245,22 @@ tbody {
     padding: 5px;
     min-width: 495px;
   }
+
+  #piechart {
+    height: 300px;
+    width: 400px;
+  }
 }
 
 @media (min-width: 200px) and (max-width: 535px) {
   .incomes-container, .expenses-container, .balance-container {
     padding: 5px;
     min-width: 385px;
+  }
+
+  #piechart {
+    height: 200px;
+    width: 300px;
   }
 }
   
