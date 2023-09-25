@@ -8,38 +8,44 @@ use \App\Models\IncomeCategory;
 use \App\Models\ExpenseCategory;
 use \App\Models\PaymentMethod;
 
-class Signup extends \Core\Controller {
-  public function newAction() {
-    View::renderTemplate('Signup/new.html');
-  }
+class Signup extends \Core\Controller
+{
+    public function newAction()
+    {
+        View::renderTemplate('Signup/new.html');
+    }
 
-  public function createAction() {
-    $user = new User($_POST);
+    public function createAction()
+    {
+        $user = new User($_POST);
 
-    if ($user->save()) {
-      IncomeCategory::copyDefaultCategories($user->getId());
-      ExpenseCategory::copyDefaultCategories($user->getId());
-      PaymentMethod::copyDefaultMethods($user->getId());
+        if ($user->save()) {
+            $user->sendActivationEmail();
+            
+            IncomeCategory::copyDefaultCategories($user->getId());
+            ExpenseCategory::copyDefaultCategories($user->getId());
+            PaymentMethod::copyDefaultMethods($user->getId());
+            
+            $this->redirect('/signup/success');
+        } else {
+            View::renderTemplate('Signup/new.html', ['user' => $user]);
+        }   
+    }
 
-      $user->sendActivationEmail();
-      
-      $this->redirect('/signup/success');
-    } else {
-      View::renderTemplate('Signup/new.html', ['user' => $user]);
-    }   
-  }
+    public function successAction()
+    {
+        View::renderTemplate('Signup/success.html');
+    }
 
-  public function successAction() {
-    View::renderTemplate('Signup/success.html');
-  }
+    public function activateAction()
+    {
+        User::activate($this->route_params['token']);
 
-  public function activateAction() {
-    User::activate($this->route_params['token']);
+        $this->redirect('/signup/activated');
+    }
 
-    $this->redirect('/signup/activated');
-  }
-
-  public function activatedAction() {
-    View::renderTemplate('Signup/activated.html');
-  }
+    public function activatedAction()
+    {
+        View::renderTemplate('Signup/activated.html');
+    }
 }

@@ -1,266 +1,265 @@
 body {
-  background-color: #fff;
+    background-color: #fff;
 }
 
 #login-button {
-  background-color: #fff;
-  border-color: rgb(0, 112, 186);
-  color: rgb(0, 112, 186);
-  border-radius: 25px;
+    background-color: #fff;
+    border-color: rgb(0, 112, 186);
+    color: rgb(0, 112, 186);
+    border-radius: 25px;
 }
 
 #login-button:hover {
-  background-color: rgb(0, 112, 186);
-  color: #fff;
+    background-color: rgb(0, 112, 186);
+    color: #fff;
 }
 
 #registration-button {
-  background-color: rgb(0, 112, 186);
-  border-radius: 25px;
-  margin-left: 9px;
+    background-color: rgb(0, 112, 186);
+    border-radius: 25px;
+    margin-left: 9px;
 }
 
 #registration-button:hover {
-  background-color: #fff;
-  color: rgb(0, 112, 186);
+    background-color: #fff;
+    color: rgb(0, 112, 186);
 }
 
 .navbar-brand {
-  color: rgb(0, 112, 186);
-  font-weight: bold;
+    color: rgb(0, 112, 186);
+    font-weight: bold;
 }
 
 .navbar-brand:hover {
-  color: rgb(0, 96, 161);
+    color: rgb(0, 96, 161);
 }
 
 .icon-square {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 0.75rem;
-  background-color: rgb(0, 112, 186);
-  color: white;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    background-color: rgb(0, 112, 186);
+    color: white;
 }
 
 #hanging-icons > p {
-  text-align: center;
+    text-align: center;
 }
 
 #registration-text, #login-text, #forgot-text {
-  color: rgb(0, 112, 186);
-  font-weight: bold;
-  text-decoration: none;
+    color: rgb(0, 112, 186);
+    font-weight: bold;
+    text-decoration: none;
 }
 
 #registration-text:hover, #login-text:hover, #forgot-text:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .registration-container, .login-container, .profile-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
 }
 
 .input-group-text, .form-control {
-  border-radius: 25px;
+    border-radius: 25px;
 }
 
 .registration-container div {
-  width: 300px;
+    width: 300px;
 }
 
 .login-container div {
-  width: 300px;
+    width: 300px;
 }
 
 .profile-container div {
-  width: 300px;
+    width: 300px;
 }
 
 #data-confirmation-button {
-  width: 300px;
-  background-color: rgb(0, 112, 186);
-  border-radius: 25px;
-  margin-bottom: 16px;
+    width: 300px;
+    background-color: rgb(0, 112, 186);
+    border-radius: 25px;
+    margin-bottom: 16px;
 }
 
 #data-confirmation-button:hover {
-  background-color: #fff;
-  color: rgb(0, 112, 186);
+    background-color: #fff;
+    color: rgb(0, 112, 186);
 }
 
 .nav-link.active {
-  font-weight: bold;
-  color: rgb(121, 122, 122) !important;
+    font-weight: bold;
+    color: rgb(121, 122, 122) !important;
 }
 
 .number, thead, .money {
-  color: rgb(0, 112, 186);
+    color: rgb(0, 112, 186);
 }
 
 .short-description {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .form-select {
-  width: 300px;
-  border-radius: 25px;
+    width: 300px;
+    border-radius: 25px;
 }
 
 .list-group {
-  border-radius: 25px;
+    border-radius: 25px;
 }
 
 .form-check-input:checked {
-  background-color: rgb(0, 112, 186);
-  border-color: rgb(0, 112, 186);
+    background-color: rgb(0, 112, 186);
+    border-color: rgb(0, 112, 186);
 }
 
 .add-cancel-buttons {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 #add-button {
-  width: 140px;
-  background-color: rgb(0, 112, 186);
-  border-radius: 25px;
+    width: 140px;
+    background-color: rgb(0, 112, 186);
+    border-radius: 25px;
 }
 
 #add-button:hover {
-  background-color: #fff;
-  color: rgb(0, 112, 186);
-  border-color: rgb(0, 112, 186);
+    background-color: #fff;
+    color: rgb(0, 112, 186);
+    border-color: rgb(0, 112, 186);
 }
 
 #cancel-button {
-  width: 140px;
-  background-color: rgb(208, 70, 70);
-  border-color: rgb(208, 70, 70);
-  border-radius: 25px;
+    width: 140px;
+    background-color: rgb(208, 70, 70);
+    border-color: rgb(208, 70, 70);
+    border-radius: 25px;
 }
 
 #cancel-button:hover {
-  background-color: #fff;
-  color: rgb(208, 70, 70);
+    background-color: #fff;
+    color: rgb(208, 70, 70);
 }
 
 .dropdown-toggle, .dropdown-menu, .table-container h3 {
-  color: rgb(0, 0, 0, 0.65);
+    color: rgb(0, 0, 0, 0.65);
 }
 
 .table-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
 }
 
 .incomes-container, .expenses-container, .balance-container {
-  max-width: 800px;
-  min-width: 600px;
-  border: 2px rgb(222, 226, 230) solid;
-  border-radius: 6px;
-  padding: 20px;
-  margin-bottom: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
+    max-width: 800px;
+    min-width: 600px;
+    border: 2px rgb(222, 226, 230) solid;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .balance-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .incomes-expenses-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 tbody {
-  border-top-color: rgb(121, 122, 122);
+    border-top-color: rgb(121, 122, 122);
 }
 
 .sum {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(4, 1fr);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(4, 1fr);
 }
 
 .first-sum-column {
-  text-align: end;
+    text-align: end;
 }
 
 .secound-sum-column {
-  text-align: start;
-  padding-left: 20px;
+    text-align: start;
+    padding-left: 20px;
 }
 
 .green-text {
-  color: rgb(28, 167, 28) !important;
+    color: rgb(28, 167, 28) !important;
 }
 
 .messages {
-  text-align: center;
+    text-align: center;
 }
 
 .errorMessages {
-  color: red !important;
+    color: red !important;
 }
 
 #piechart {
-  height: 400px;
-  width: 600px;
+    height: 400px;
+    width: 600px;
 }
 
 #piechart > div {
-  left: 30px !important;
+    left: 30px !important;
 }
 
 @media (min-width: 850px) and (max-width: 1400px) {
-  .incomes-container, .expenses-container, .balance-container {
-    min-width: 800px;
-  }
+    .incomes-container, .expenses-container, .balance-container {
+        min-width: 800px;
+    }
 
-  #piechart {
-    height: 400px;
-    width: 600px;
-  }
+    #piechart {
+        height: 400px;
+        width: 600px;
+    }
 }
 
 @media (min-width: 651px) and (max-width: 849px) {
-  #piechart {
-    height: 350px;
-    width: 500px;
-  }
+    #piechart {
+        height: 350px;
+        width: 500px;
+    }
 }
 
 @media (min-width: 536px) and (max-width: 650px) {
-  .incomes-container, .expenses-container, .balance-container {
-    padding: 5px;
-    min-width: 495px;
-  }
+    .incomes-container, .expenses-container, .balance-container {
+        padding: 5px;
+        min-width: 495px;
+    }
 
-  #piechart {
-    height: 300px;
-    width: 400px;
-  }
+    #piechart {
+        height: 300px;
+        width: 400px;
+    }
 }
 
 @media (min-width: 200px) and (max-width: 535px) {
-  .incomes-container, .expenses-container, .balance-container {
-    padding: 5px;
-    min-width: 385px;
-  }
+    .incomes-container, .expenses-container, .balance-container {
+        padding: 5px;
+        min-width: 385px;
+    }
 
-  #piechart {
-    height: 200px;
-    width: 300px;
-  }
+    #piechart {
+        height: 200px;
+        width: 300px;
+    }
 }
-  

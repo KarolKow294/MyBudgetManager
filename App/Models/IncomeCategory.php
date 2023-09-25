@@ -5,8 +5,10 @@ namespace App\Models;
 use PDO;
 use \Core\View;
 
-class IncomeCategory extends \Core\Model {    
-    public static function copyDefaultCategories($user_id) {
+class IncomeCategory extends \Core\Model
+{    
+    public static function copyDefaultCategories($user_id)
+    {
         $sql = 'INSERT INTO incomes_category_assigned_to_users (name, user_id)
                 SELECT incomes_category_default.name, :user_id
                 FROM incomes_category_default';
@@ -19,8 +21,11 @@ class IncomeCategory extends \Core\Model {
         $stmt->execute();
     }
 
-    public static function fetchCategoriesAssignedToUser($user_id) {
-        $sql = 'SELECT id, name FROM incomes_category_assigned_to_users WHERE user_id = :user_id';
+    public static function fetchCategoriesAssignedToUser($user_id)
+    {
+        $sql = 'SELECT id, name
+                FROM incomes_category_assigned_to_users
+                WHERE user_id = :user_id';
 
         $db = static::getDB();
         $stmt = $db->prepare($sql);

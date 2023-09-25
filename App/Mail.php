@@ -6,7 +6,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-class Mail {
+class Mail
+{
     public static function send($to, $subject, $text, $html) {
         $mail = new PHPMailer(true);
 

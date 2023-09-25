@@ -2,10 +2,12 @@
 
 namespace App;
 
-class Token {
+class Token
+{
     protected $token;
 
-    public function __construct($token_value = null) {
+    public function __construct($token_value = null)
+    {
         if ($token_value) {
             $this->token = $token_value;
         } else {
@@ -13,11 +15,13 @@ class Token {
         }
     }
 
-    public function getValue() {
+    public function getValue()
+    {
         return $this->token;
     }
 
-    public function getHash() {
+    public function getHash()
+    {
         return hash_hmac('sha256', $this->token, \App\Config::SECRET_KEY);
     }
 }

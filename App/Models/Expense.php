@@ -7,7 +7,8 @@ use \Core\View;
 use \App\Auth;
 use DateTime;
 
-class Expense extends \Core\Model {
+class Expense extends \Core\Model
+{
     public $expense_category_assigned_to_user_id;
     public $payment_method_assigned_to_user_id;
     public $amount;
@@ -17,13 +18,15 @@ class Expense extends \Core\Model {
     public $success;
 
     
-    public function __construct($data = []) {
+    public function __construct($data = [])
+    {
         foreach ($data as $key => $value) {
-          $this->$key = $value;
+            $this->$key = $value;
         }
     }
 
-    public function save() {
+    public function save()
+    {
         $this->validate();
         
         $user_id = $_SESSION['user_id'];
@@ -50,8 +53,49 @@ class Expense extends \Core\Model {
         }
         return false;
     }
+
+    public static function fetchExpensesByDate($user_id, $start_date, $end_date)
+    {
+        $sql = 'SELECT expenses.amount, expenses.date_of_expense, expenses.expense_comment, expenses_category_assigned_to_users.name, payment_methods_assigned_to_users.name AS payment_method
+                FROM expenses
+                INNER JOIN expenses_category_assigned_to_users ON expenses_category_assigned_to_users.id = expenses.expense_category_assigned_to_user_id
+                INNER JOIN payment_methods_assigned_to_users ON payment_methods_assigned_to_users.id = expenses.payment_method_assigned_to_user_id
+                WHERE expenses.user_id = :user_id AND expenses.date_of_expense BETWEEN :start_date AND :end_date
+                ORDER BY expenses.date_of_expense';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam('user_id', $user_id, PDO::PARAM_STR);
+        $stmt->bindParam('start_date', $start_date, PDO::PARAM_STR);
+        $stmt->bindParam('end_date', $end_date, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function fetchTotalExpensesByCategoryAndDate($user_id, $start_date, $end_date)
+    {
+        $sql = 'SELECT expenses_category_assigned_to_users.name, SUM(expenses.amount) total_amount_by_category
+                FROM expenses_category_assigned_to_users
+                INNER JOIN expenses ON expenses.expense_category_assigned_to_user_id = expenses_category_assigned_to_users.id
+                WHERE expenses.user_id = :user_id AND expenses.date_of_expense BETWEEN :start_date AND :end_date
+                GROUP BY expenses_category_assigned_to_users.name
+                ORDER BY total_amount_by_category DESC';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam('user_id', $user_id, PDO::PARAM_STR);
+        $stmt->bindParam('start_date', $start_date, PDO::PARAM_STR);
+        $stmt->bindParam('end_date', $end_date, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     
-    public function validate() {
+    private function validate()
+    {
         if ($this->amount != '') {
             if (! preg_match("/^-?[0-9]+(?:\.[0-9]{1,2})?$/", $this->amount)) {
                 $this->errors[] = 'Wprowadź prawidłową kwotę';

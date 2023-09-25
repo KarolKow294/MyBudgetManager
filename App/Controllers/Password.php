@@ -5,18 +5,22 @@ namespace App\Controllers;
 use \Core\View;
 use \App\Models\User;
 
-class Password extends \Core\Controller {
-    public function forgotAction() {
+class Password extends \Core\Controller
+{
+    public function forgotAction()
+    {
         View::renderTemplate('Password/forgot.html');
     }
 
-    public function requestResetAction() {
+    public function requestResetAction()
+    {
         User::sendPasswordReset($_POST['email']);
 
         View::renderTemplate('Password/reset_requested.html');
     }
 
-    public function resetAction() {
+    public function resetAction()
+    {
         $token = $this->route_params['token'];
 
         $user = $this->getUserOrExit($token);
@@ -24,7 +28,8 @@ class Password extends \Core\Controller {
         View::renderTemplate('Password/reset.html', ['token' => $token]);
     }
 
-    public function resetPasswordAction() {
+    public function resetPasswordAction()
+    {
         $token = $_POST['token'];
 
         $user = $this->getUserOrExit($token);
@@ -36,7 +41,8 @@ class Password extends \Core\Controller {
         }
     }
 
-    protected function getUserOrExit($token) {
+    protected function getUserOrExit($token)
+    {
         $user = User::findByPasswordReset($token);
 
         if ($user) {

@@ -5,16 +5,19 @@ namespace App\Models;
 use PDO;
 use \App\Token;
 
-class RememberedLogin extends \Core\Model {
+class RememberedLogin extends \Core\Model
+{
     protected $token_hash;
     protected $user_id;
     protected $expires_at;
 
-    public static function findByToken($token) {
+    public static function findByToken($token)
+    {
         $token = new Token($token);
         $token_hash = $token->getHash();
 
-        $sql = 'SELECT * FROM remembered_logins
+        $sql = 'SELECT *
+                FROM remembered_logins
                 WHERE token_hash = :token_hash';
         
         $db = static::getDB();
@@ -28,16 +31,20 @@ class RememberedLogin extends \Core\Model {
         return $stmt->fetch();
     }
 
-    public function getUser() {
+    public function getUser()
+    {
         return User::findByID($this->user_id);
     }
 
-    public function hasExpired() {
+    public function hasExpired()
+    {
         return strtotime($this->expires_at) < time();
     }
 
-    public function delete() {
-        $sql = 'DELETE FROM remembered_logins
+    public function delete()
+    {
+        $sql = 'DELETE
+                FROM remembered_logins
                 WHERE token_hash = :token_hash';
         
         $db = static::getDB();

@@ -2,18 +2,22 @@
 
 namespace Core;
 
-class Error {
-    public static function errorHandler($level, $message, $file, $line) {
+class Error
+{
+    public static function errorHandler($level, $message, $file, $line)
+    {
         if (error_reporting() !== 0) {
             throw new \ErrorException($message, 0, $level, $file, $line);
         }
     }
 
-    public static function exceptionHandler($exception) {
+    public static function exceptionHandler($exception)
+    {
         $code = $exception->getCode();
         if ($code != 404) {
             $code = 500;
         }
+        
         http_response_code($code);
         
         if (\App\Config::SHOW_ERRORS) {
@@ -32,12 +36,7 @@ class Error {
             $message .= "\nThrown in '" . $exception->getFile() . "' on line " . $exception->getLine();
 
             error_log($message);
-            //echo "<h1>An error occurred</h1>";
-            /*if ($code == 404) {
-                echo "<h1>Page not found</h1>";
-            } else {
-                echo "<h1>An error occurred</h1>";
-            }*/
+
             View::renderTemplate("$code.html");
         }
     }
