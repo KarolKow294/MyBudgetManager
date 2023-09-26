@@ -7,6 +7,7 @@ use \Core\View;
 
 class IncomeCategory extends \Core\Model
 {    
+    public $id;
     public $name;
     public $new_name;
     public $save_success;
@@ -88,19 +89,20 @@ class IncomeCategory extends \Core\Model
     {
         $user_id = $_SESSION['user_id'];
 
-        $this->$update_errors = $this->validate();
+        $this->update_errors = $this->validateNewName($user_id);
 
-        if (empty($update_errors)) {
+        if (empty($this->update_errors)) {
 
             $sql = 'UPDATE incomes_category_assigned_to_users
-                    SET name = :name
+                    SET name = :new_name
                     WHERE id = :id AND user_id = :user_id';
 
             $db = static::getDB();
             $stmt = $db->prepare($sql);
 
-            $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
-            $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
+            $stmt->bindValue(':new_name', $this->new_name, PDO::PARAM_STR);
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_STR);
+            $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
 
             $this->update_success = true;
 
@@ -109,7 +111,31 @@ class IncomeCategory extends \Core\Model
         return false;
     }
 
-    private function validate($user_id, $new_name = '')
+    public function delete()
+    {
+        $user_id = $_SESSION['user_id'];
+
+        $this->delete_errors = $this->validateDelete($user_id);
+
+        if (empty($this->delete_errors)) {
+
+            $sql = 'DELETE FROM incomes_category_assigned_to_users
+                    WHERE id = :id AND user_id = :user_id';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_STR);
+            $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+
+            $this->delete_success = true;
+
+            return $stmt->execute();
+        }
+        return false;
+    }
+
+    private function validate($user_id)
     {
         $errors = [];
 
@@ -124,6 +150,53 @@ class IncomeCategory extends \Core\Model
             
         } else {
             $errors[] = 'Nazwa jest wymagana';
+        }
+
+        return $errors;
+    }
+
+    private function validateNewName($user_id)
+    {
+        $errors = [];
+
+        if ($this->new_name != '') {
+            $categories = $this->fetchCategoriesAssignedToUser($user_id);
+
+            foreach ($categories as $category) {
+                if ($category == $this->new_name) {
+                    $errors[] = 'Nazwa kategorii jest już zajęta';
+                }
+            }
+            
+        } else {
+            $errors[] = 'Nazwa jest wymagana';
+        }
+
+        return $errors;
+    }
+
+    private function validateDelete($user_id)
+    {
+        $errors = [];
+
+        if ($this->id != '') {
+            $categories = $this->fetchCategoriesAssignedToUser($user_id);
+
+            $categoryExist = false;
+
+            foreach ($categories as $key => $category) {
+                if ($key == $this->id) {
+                    $categoryExist = true;
+                    $this->name = $category;
+                }
+            }
+
+            if (!$categoryExist) {
+                $errors[] = 'Kategoria nie istnieje';
+            }
+            
+        } else {
+            $errors[] = 'Kategoria jest wymagana';
         }
 
         return $errors;
