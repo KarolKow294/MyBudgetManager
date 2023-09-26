@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Profile{% endblock%}
+{% block title %}Edytuj konto{% endblock%}
 
 {% block footer %}
     <script src="/js/hideShowPassword.min.js"></script>
@@ -76,7 +76,7 @@
     <main>
         <div class="profile-container">
             <header>
-                <h2>Ustawienia profilu</h2>
+                <h2>Ustawienia konta</h2>
             </header>
 
             {% if user.errors is not empty %}
@@ -127,8 +127,8 @@
                 </div>
                 
                 <div class="add-cancel-buttons">
-                    <button id="add-button" class="btn btn-primary" type="submit">Zapisz</button>
                     <a id="cancel-button" class="btn btn-primary" role="button" href="/profile/show">Anuluj</a>
+                    <button id="add-button" class="btn btn-primary" type="submit">Zapisz</button>
                 </div>
                 
             </form>

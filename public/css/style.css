@@ -159,7 +159,7 @@ body {
     margin-top: 20px;
 }
 
-.incomes-container, .expenses-container, .balance-container {
+.incomes-container, .expenses-container, .balance-container, .settings-container {
     max-width: 800px;
     min-width: 600px;
     border: 2px rgb(222, 226, 230) solid;
@@ -222,8 +222,50 @@ tbody {
     left: 30px !important;
 }
 
+.add-button {
+    width: 200px;
+    background-color: rgb(25, 135, 84);
+    border-radius: 25px;
+}
+
+.add-button:hover {
+    background-color: #fff;
+    color: rgb(25, 135, 84);
+    border-color: rgb(25, 135, 84);
+}
+
+.edit-button {
+    width: 200px;
+    background-color: rgb(0, 112, 186);
+    border-radius: 25px;
+}
+
+.edit-button:hover {
+    background-color: #fff;
+    color: rgb(0, 112, 186);
+    border-color: rgb(0, 112, 186);
+}
+
+.delete-button {
+    width: 200px;
+    background-color: rgb(208, 70, 70);
+    border-color: rgb(208, 70, 70);
+    border-radius: 25px;
+}
+
+.delete-button:hover {
+    background-color: #fff;
+    color: rgb(208, 70, 70);
+}
+
+@media (min-width: 1401px) {
+    .settings-container {
+        min-width: 800px;
+    }
+}
+
 @media (min-width: 850px) and (max-width: 1400px) {
-    .incomes-container, .expenses-container, .balance-container {
+    .incomes-container, .expenses-container, .balance-container, .settings-container {
         min-width: 800px;
     }
 
@@ -241,7 +283,7 @@ tbody {
 }
 
 @media (min-width: 536px) and (max-width: 650px) {
-    .incomes-container, .expenses-container, .balance-container {
+    .incomes-container, .expenses-container, .balance-container, .settings-container {
         padding: 5px;
         min-width: 495px;
     }
@@ -250,10 +292,14 @@ tbody {
         height: 300px;
         width: 400px;
     }
+
+    .flexible-button {
+        width: 150px !important;
+    }
 }
 
 @media (min-width: 200px) and (max-width: 535px) {
-    .incomes-container, .expenses-container, .balance-container {
+    .incomes-container, .expenses-container, .balance-container, .settings-container {
         padding: 5px;
         min-width: 385px;
     }
@@ -261,5 +307,9 @@ tbody {
     #piechart {
         height: 200px;
         width: 300px;
+    }
+
+    .flexible-button {
+        width: 100px !important;
     }
 }

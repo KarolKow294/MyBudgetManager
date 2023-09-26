@@ -122,10 +122,10 @@ class Income extends \Core\Model
                 }
             }
             if ($correct_category == false) {
-                $this->errors[] = 'Categoria jest inna niż przypisana do użytkownika';
+                $this->errors[] = 'Kategoria jest inna niż przypisana do użytkownika';
             }
         } else {
-            $this->errors[] = 'Categoria jest wymagana';
+            $this->errors[] = 'Kategoria jest wymagana';
         }
     }
 }
