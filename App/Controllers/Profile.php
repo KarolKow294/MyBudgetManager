@@ -36,4 +36,20 @@ class Profile extends Authenticated
             View::renderTemplate('Profile/edit.html', ['user' => $this->user]);
         }
     }
+
+    public function deleteAction()
+    {
+        $this->user->deleteProfile();
+
+        Auth::logout();
+
+        $this->showDeleteMessageAction();
+    }
+
+    public function showDeleteMessageAction()
+    {
+        Flash::addMessage('Konto zostało usunięte');
+
+        $this->redirect('/');
+    }
 }

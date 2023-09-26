@@ -4,6 +4,20 @@
 
 {% block footer %}
 
+<script>
+    $("#delete-user").on("click", function(e) {
+        e.preventDefault();
+
+        if (confirm("Czy chcesz na pewno usunąć konto?")) {
+            var frm = $("<form>");
+            frm.attr('method', 'post');
+            frm.attr('action', $(this).attr('href'));
+            frm.appendTo("body");
+            frm.submit();
+        }
+    });
+</script>
+
 {% endblock %}
 
 {% block body %}
@@ -356,7 +370,7 @@
                         <tr>
                             <td class="d-flex justify-content-around">
                                 <a class="btn btn-primary edit-button" href="/Profile/edit" role="button">Edytuj dane konta</a>
-                                <a class="btn btn-primary delete-button" href="#" role="button">Usuń konto</a>
+                                <a id="delete-user" class="btn btn-primary delete-button" href="/Profile/delete" role="button">Usuń konto</a>
                             </td>
                         </tr>
                     </tbody>
