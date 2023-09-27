@@ -8,6 +8,7 @@ use \App\Models\Income;
 use \App\Models\Expense;
 use \App\Models\Balance;
 use \App\Validator;
+use \App\Flash;
 
 class Budget extends Authenticated
 {
@@ -115,5 +116,73 @@ class Budget extends Authenticated
         $expense->save();
 
         View::renderTemplate('Budget/expense.html', ['expense' => $expense]);
-    } 
+    }
+
+    public function editIncomeAction()
+    {
+        $income_id = $_GET['id'];
+
+        $income = Income::fetchIncomeById($income_id);
+
+        View::renderTemplate('Budget/edit_income.html', ['income' => $income]);
+    }
+
+    public function updateIncomeAction()
+    {   
+        $income = new Income();
+        $income_id = $_GET['id'];
+
+        if ($income->update($_POST, $income_id)) {
+            Flash::addMessage('Zmiany zostały zapisane');
+
+            $this->redirect('/Budget/currentMonth');
+        } else {
+            View::renderTemplate('Budget/edit_income.html', ['income' => $income]);
+        }
+    }
+
+    public function deleteIncomeAction()
+    {   
+        $income_id = $_GET['id'];
+
+        Income::delete($income_id);
+
+        Flash::addMessage('Przychód został usunięty');
+
+        $this->redirect('/Budget/currentMonth');
+    }
+
+    public function editExpenseAction()
+    {
+        $expense_id = $_GET['id'];
+
+        $expense = Expense::fetchExpenseById($expense_id);
+
+        View::renderTemplate('Budget/edit_expense.html', ['expense' => $expense]);
+    }
+
+    public function updateExpenseAction()
+    {   
+        $expense = new Expense();
+        $expense_id = $_GET['id'];
+
+        if ($expense->update($_POST, $expense_id)) {
+            Flash::addMessage('Zmiany zostały zapisane');
+
+            $this->redirect('/Budget/currentMonth');
+        } else {
+            View::renderTemplate('Budget/edit_expense.html', ['expense' => $expense]);
+        }
+    }
+
+    public function deleteExpenseAction()
+    {   
+        $expense_id = $_GET['id'];
+
+        Expense::delete($expense_id);
+
+        Flash::addMessage('Wydatek został usunięty');
+
+        $this->redirect('/Budget/currentMonth');
+    }
 }

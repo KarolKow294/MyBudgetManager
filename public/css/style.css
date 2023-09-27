@@ -159,7 +159,7 @@ body {
     margin-top: 20px;
 }
 
-.incomes-container, .expenses-container, .balance-container {
+.incomes-container, .expenses-container, .balance-container, .settings-container {
     max-width: 800px;
     min-width: 600px;
     border: 2px rgb(222, 226, 230) solid;
@@ -180,6 +180,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    width: 1400px;
 }
 
 tbody {
@@ -222,8 +223,78 @@ tbody {
     left: 30px !important;
 }
 
-@media (min-width: 850px) and (max-width: 1400px) {
+.add-button {
+    width: 200px;
+    background-color: rgb(25, 135, 84);
+    border-radius: 25px;
+}
+
+.add-button:hover {
+    background-color: #fff;
+    color: rgb(25, 135, 84);
+    border-color: rgb(25, 135, 84);
+}
+
+.edit-button {
+    width: 200px;
+    background-color: rgb(0, 112, 186);
+    border-radius: 25px;
+}
+
+.edit-button:hover {
+    background-color: #fff;
+    color: rgb(0, 112, 186);
+    border-color: rgb(0, 112, 186);
+}
+
+.delete-button {
+    width: 200px;
+    background-color: rgb(208, 70, 70) !important;
+    border-color: rgb(208, 70, 70) !important;
+    border-radius: 25px;
+}
+
+.delete-button:hover {
+    background-color: #fff !important;
+    color: rgb(208, 70, 70) !important;
+    border-color: rgb(208, 70, 70) !important;
+}
+
+.small-font {
+    font-size: 10px;
+}
+
+#table-margin {
+    margin-bottom: 0px !important;
+    border-collapse: separate;
+    border-spacing: 1px;
+}
+
+.delete-income-expense {
+    width: 300px;
+    background-color: rgb(208, 70, 70) !important;
+    border-color: rgb(208, 70, 70) !important;
+    border-radius: 25px;
+}
+
+.delete-income-expense:hover {
+    background-color: #fff !important;
+    color: rgb(208, 70, 70) !important;
+    border-color: rgb(208, 70, 70) !important;
+}
+
+@media (min-width: 1401px) {
+    .settings-container {
+        min-width: 800px;
+    }
+
     .incomes-container, .expenses-container, .balance-container {
+        min-width: 630px;
+    }
+}
+
+@media (min-width: 850px) and (max-width: 1400px) {
+    .incomes-container, .expenses-container, .balance-container, .settings-container {
         min-width: 800px;
     }
 
@@ -231,17 +302,29 @@ tbody {
         height: 400px;
         width: 600px;
     }
+
+    .incomes-expenses-container {
+        width: auto;
+    }
 }
 
 @media (min-width: 651px) and (max-width: 849px) {
+    .incomes-container, .expenses-container, .balance-container, .settings-container {
+        min-width: 600px;
+    }
+
     #piechart {
         height: 350px;
         width: 500px;
     }
+
+    .incomes-expenses-container {
+        width: auto;
+    }
 }
 
 @media (min-width: 536px) and (max-width: 650px) {
-    .incomes-container, .expenses-container, .balance-container {
+    .incomes-container, .expenses-container, .balance-container, .settings-container {
         padding: 5px;
         min-width: 495px;
     }
@@ -250,10 +333,23 @@ tbody {
         height: 300px;
         width: 400px;
     }
+
+    .flexible-button {
+        width: 150px !important;
+    }
+
+    .incomes-expenses-container {
+        width: auto;
+    }
 }
 
 @media (min-width: 200px) and (max-width: 535px) {
-    .incomes-container, .expenses-container, .balance-container {
+    .incomes-container, .expenses-container, .balance-container, .settings-container {
+        padding: 5px;
+        min-width: 425px;
+    }
+
+    .settings-container {
         padding: 5px;
         min-width: 385px;
     }
@@ -261,5 +357,21 @@ tbody {
     #piechart {
         height: 200px;
         width: 300px;
+    }
+
+    .flexible-button {
+        width: 80px !important;
+    }
+
+    .incomes-expenses-container {
+        width: auto;
+    }
+
+    #input-settings {
+        width: 50px !important;
+    }
+
+    .edit-button, .delete-button {
+        width: 160px;
     }
 }

@@ -9,6 +9,8 @@ use DateTime;
 
 class Income extends \Core\Model
 {
+    public $id;
+    public $user_id;
     public $income_category_assigned_to_user_id;
     public $amount;
     public $date_of_income;
@@ -53,7 +55,7 @@ class Income extends \Core\Model
 
     public static function fetchIncomesByDate($user_id, $start_date, $end_date)
     {
-        $sql = 'SELECT incomes.amount, incomes.date_of_income, incomes.income_comment, incomes_category_assigned_to_users.name
+        $sql = 'SELECT incomes.id, incomes.amount, incomes.date_of_income, incomes.income_comment, incomes_category_assigned_to_users.name
                 FROM incomes
                 INNER JOIN incomes_category_assigned_to_users ON incomes_category_assigned_to_users.id = incomes.income_category_assigned_to_user_id
                 WHERE incomes.user_id = :user_id AND incomes.date_of_income BETWEEN :start_date AND :end_date
@@ -89,6 +91,68 @@ class Income extends \Core\Model
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function fetchIncomeById($id)
+    {
+        $sql = 'SELECT *
+                FROM incomes
+                WHERE incomes.id = :id';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam('id', $id, PDO::PARAM_STR);
+
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
+    public function update($data, $id)
+    {
+        $this->income_category_assigned_to_user_id = $data['income_category_assigned_to_user_id'];
+        $this->amount = $data['amount'];
+        $this->date_of_income = $data['date_of_income'];
+        $this->income_comment = $data['income_comment'];
+        
+        $this->id = $id;
+
+        $this->validate();
+
+        if (empty($this->errors)) {
+            $convertedDate = strtotime($this->date_of_income);
+
+            $sql = 'UPDATE incomes
+                    SET income_category_assigned_to_user_id = :income_category_assigned_to_user_id, amount = :amount, date_of_income = :date_of_income, income_comment = :income_comment
+                    WHERE id = :id';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':income_category_assigned_to_user_id', $this->income_category_assigned_to_user_id, PDO::PARAM_STR);
+            $stmt->bindValue(':amount', $this->amount, PDO::PARAM_STR);
+            $stmt->bindValue(':date_of_income', date('Y-m-d', $convertedDate), PDO::PARAM_STR);
+            $stmt->bindValue(':income_comment', $this->income_comment, PDO::PARAM_STR);
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
+
+            return $stmt->execute();
+        }
+        return false;
+    }
+
+    public static function delete($id)
+    {
+        $sql = 'DELETE FROM incomes
+                WHERE id = :id';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':id', $id, PDO::PARAM_STR);
+
+        $stmt->execute();
+    }
     
     private function validate()
     {
@@ -122,10 +186,10 @@ class Income extends \Core\Model
                 }
             }
             if ($correct_category == false) {
-                $this->errors[] = 'Categoria jest inna niż przypisana do użytkownika';
+                $this->errors[] = 'Kategoria jest inna niż przypisana do użytkownika';
             }
         } else {
-            $this->errors[] = 'Categoria jest wymagana';
+            $this->errors[] = 'Kategoria jest wymagana';
         }
     }
 }

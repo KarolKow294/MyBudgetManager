@@ -9,6 +9,8 @@ use DateTime;
 
 class Expense extends \Core\Model
 {
+    public $id;
+    public $user_id;
     public $expense_category_assigned_to_user_id;
     public $payment_method_assigned_to_user_id;
     public $amount;
@@ -56,7 +58,7 @@ class Expense extends \Core\Model
 
     public static function fetchExpensesByDate($user_id, $start_date, $end_date)
     {
-        $sql = 'SELECT expenses.amount, expenses.date_of_expense, expenses.expense_comment, expenses_category_assigned_to_users.name, payment_methods_assigned_to_users.name AS payment_method
+        $sql = 'SELECT expenses.id, expenses.amount, expenses.date_of_expense, expenses.expense_comment, expenses_category_assigned_to_users.name, payment_methods_assigned_to_users.name AS payment_method
                 FROM expenses
                 INNER JOIN expenses_category_assigned_to_users ON expenses_category_assigned_to_users.id = expenses.expense_category_assigned_to_user_id
                 INNER JOIN payment_methods_assigned_to_users ON payment_methods_assigned_to_users.id = expenses.payment_method_assigned_to_user_id
@@ -94,6 +96,70 @@ class Expense extends \Core\Model
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
+    public static function fetchExpenseById($id)
+    {
+        $sql = 'SELECT *
+                FROM expenses
+                WHERE expenses.id = :id';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam('id', $id, PDO::PARAM_STR);
+
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
+    public function update($data, $id)
+    {
+        $this->payment_method_assigned_to_user_id = $data['payment_method_assigned_to_user_id'];
+        $this->expense_category_assigned_to_user_id = $data['expense_category_assigned_to_user_id'];
+        $this->amount = $data['amount'];
+        $this->date_of_expense = $data['date_of_expense'];
+        $this->expense_comment = $data['expense_comment'];
+
+        $this->id = $id;
+
+        $this->validate();
+
+        if (empty($this->errors)) {
+            $convertedDate = strtotime($this->date_of_expense);
+
+            $sql = 'UPDATE expenses
+                    SET payment_method_assigned_to_user_id = :payment_method_assigned_to_user_id, expense_category_assigned_to_user_id = :expense_category_assigned_to_user_id, amount = :amount, date_of_expense = :date_of_expense, expense_comment = :expense_comment
+                    WHERE id = :id';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':payment_method_assigned_to_user_id', $this->payment_method_assigned_to_user_id, PDO::PARAM_STR);
+            $stmt->bindValue(':expense_category_assigned_to_user_id', $this->expense_category_assigned_to_user_id, PDO::PARAM_STR);
+            $stmt->bindValue(':amount', $this->amount, PDO::PARAM_STR);
+            $stmt->bindValue(':date_of_expense', date('Y-m-d', $convertedDate), PDO::PARAM_STR);
+            $stmt->bindValue(':expense_comment', $this->expense_comment, PDO::PARAM_STR);
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
+
+            return $stmt->execute();
+        }
+        return false;
+    }
+
+    public static function delete($id)
+    {
+        $sql = 'DELETE FROM expenses
+                WHERE id = :id';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':id', $id, PDO::PARAM_STR);
+
+        $stmt->execute();
+    }
+
     private function validate()
     {
         if ($this->amount != '') {
@@ -126,10 +192,10 @@ class Expense extends \Core\Model
                 }
             }
             if ($correct_category == false) {
-                $this->errors[] = 'Categoria jest inna niż przypisana do użytkownika';
+                $this->errors[] = 'Kategoria jest inna niż przypisana do użytkownika';
             }
         } else {
-            $this->errors[] = 'Categoria jest wymagana';
+            $this->errors[] = 'Kategoria jest wymagana';
         }
 
         if ($this->payment_method_assigned_to_user_id != '') {

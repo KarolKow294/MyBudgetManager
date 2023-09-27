@@ -301,7 +301,7 @@ class User extends \Core\Model {
         
         if ($data['password'] != '') {
         $this->password = $data['password'];
-        $this->repeatPassword = $data['repeatPassword'];
+        $this->repeat_password = $data['repeatPassword'];
         }
 
         $this->validate();
@@ -333,6 +333,78 @@ class User extends \Core\Model {
             return $stmt->execute();
         }
         return false;
+    }
+
+    public function deleteProfile()
+    {
+            $sql = 'DELETE FROM users
+                    WHERE id = :id';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_STR);
+            $stmt->execute();
+
+            
+            $sql = 'DELETE FROM remembered_logins
+                    WHERE user_id = :id';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_STR);
+            $stmt->execute();
+
+
+            $sql = 'DELETE FROM incomes
+                    WHERE user_id = :id';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_STR);
+            $stmt->execute();
+
+
+            $sql = 'DELETE FROM expenses
+                    WHERE user_id = :id';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_STR);
+            $stmt->execute();
+
+
+            $sql = 'DELETE FROM incomes_category_assigned_to_users
+                    WHERE user_id = :id';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_STR);
+            $stmt->execute();
+
+
+            $sql = 'DELETE FROM expenses_category_assigned_to_users
+                    WHERE user_id = :id';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_STR);
+            $stmt->execute();
+
+
+            $sql = 'DELETE FROM payment_methods_assigned_to_users
+                    WHERE user_id = :id';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_STR);
+            $stmt->execute();
     }
 
     public function getId()
