@@ -95,7 +95,7 @@
                     <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
                     </svg>
                 </span>
-                <input type="date" name="date_of_expense" class="form-control" placeholder="Data (rrrr-mm-dd)" aria-label="Data" value="{{ income.date_of_expense }}" required>
+                <input type="date" name="date_of_expense" class="form-control" placeholder="Data (rrrr-mm-dd)" aria-label="Data" value="{{ expense.date_of_expense }}" required>
                 </div>
                 
                 <div class="input-group mb-3">
@@ -145,7 +145,7 @@
 
             </form>
             <div class="add-cancel-buttons mt-3">
-                <a id="delete-income" class="btn btn-primary delete-income-expense" href="/Budget/expense/delete?id={{ income.id }}" role="button">Usuń przychód</a>
+                <a id="delete-expense" class="btn btn-primary delete-income-expense" href="/Budget/expense/delete?id={{ expense.id }}" role="button">Usuń przychód</a>
             </div>
         </div>
     </main>

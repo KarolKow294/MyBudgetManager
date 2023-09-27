@@ -113,14 +113,9 @@ class Income extends \Core\Model
     {
         $this->income_category_assigned_to_user_id = $data['income_category_assigned_to_user_id'];
         $this->amount = $data['amount'];
-
-        $this->date_of_income = $data['date_of_income'];      
-
-        if ($data['income_comment'] == '') {
-            $this->income_comment = NULL;
-        } else {
-            $this->income_comment = $data['income_comment'];
-        } 
+        $this->date_of_income = $data['date_of_income'];
+        $this->income_comment = $data['income_comment'];
+        
         $this->id = $id;
 
         $this->validate();
@@ -138,7 +133,7 @@ class Income extends \Core\Model
             $stmt->bindValue(':income_category_assigned_to_user_id', $this->income_category_assigned_to_user_id, PDO::PARAM_STR);
             $stmt->bindValue(':amount', $this->amount, PDO::PARAM_STR);
             $stmt->bindValue(':date_of_income', date('Y-m-d', $convertedDate), PDO::PARAM_STR);
-            $stmt->bindValue(':income_comment', $this->income_comment, PDO::PARAM_INT);
+            $stmt->bindValue(':income_comment', $this->income_comment, PDO::PARAM_STR);
             $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
 
             return $stmt->execute();

@@ -346,7 +346,12 @@ tbody {
 @media (min-width: 200px) and (max-width: 535px) {
     .incomes-container, .expenses-container, .balance-container, .settings-container {
         padding: 5px;
-        min-width: 424px;
+        min-width: 425px;
+    }
+
+    .settings-container {
+        padding: 5px;
+        min-width: 385px;
     }
 
     #piechart {
@@ -355,10 +360,18 @@ tbody {
     }
 
     .flexible-button {
-        width: 100px !important;
+        width: 80px !important;
     }
 
     .incomes-expenses-container {
         width: auto;
+    }
+
+    #input-settings {
+        width: 50px !important;
+    }
+
+    .edit-button, .delete-button {
+        width: 160px;
     }
 }

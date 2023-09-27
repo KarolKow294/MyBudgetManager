@@ -151,4 +151,38 @@ class Budget extends Authenticated
 
         $this->redirect('/Budget/currentMonth');
     }
+
+    public function editExpenseAction()
+    {
+        $expense_id = $_GET['id'];
+
+        $expense = Expense::fetchExpenseById($expense_id);
+
+        View::renderTemplate('Budget/edit_expense.html', ['expense' => $expense]);
+    }
+
+    public function updateExpenseAction()
+    {   
+        $expense = new Expense();
+        $expense_id = $_GET['id'];
+
+        if ($expense->update($_POST, $expense_id)) {
+            Flash::addMessage('Zmiany zostały zapisane');
+
+            $this->redirect('/Budget/currentMonth');
+        } else {
+            View::renderTemplate('Budget/edit_expense.html', ['expense' => $expense]);
+        }
+    }
+
+    public function deleteExpenseAction()
+    {   
+        $expense_id = $_GET['id'];
+
+        Expense::delete($expense_id);
+
+        Flash::addMessage('Wydatek został usunięty');
+
+        $this->redirect('/Budget/currentMonth');
+    }
 }
