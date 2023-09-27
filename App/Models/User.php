@@ -301,7 +301,7 @@ class User extends \Core\Model {
         
         if ($data['password'] != '') {
         $this->password = $data['password'];
-        $this->repeatPassword = $data['repeatPassword'];
+        $this->repeat_password = $data['repeatPassword'];
         }
 
         $this->validate();

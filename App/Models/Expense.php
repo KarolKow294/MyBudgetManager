@@ -56,7 +56,7 @@ class Expense extends \Core\Model
 
     public static function fetchExpensesByDate($user_id, $start_date, $end_date)
     {
-        $sql = 'SELECT expenses.amount, expenses.date_of_expense, expenses.expense_comment, expenses_category_assigned_to_users.name, payment_methods_assigned_to_users.name AS payment_method
+        $sql = 'SELECT expenses.id, expenses.amount, expenses.date_of_expense, expenses.expense_comment, expenses_category_assigned_to_users.name, payment_methods_assigned_to_users.name AS payment_method
                 FROM expenses
                 INNER JOIN expenses_category_assigned_to_users ON expenses_category_assigned_to_users.id = expenses.expense_category_assigned_to_user_id
                 INNER JOIN payment_methods_assigned_to_users ON payment_methods_assigned_to_users.id = expenses.payment_method_assigned_to_user_id

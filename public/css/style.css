@@ -180,6 +180,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    width: 1400px;
 }
 
 tbody {
@@ -248,19 +249,47 @@ tbody {
 
 .delete-button {
     width: 200px;
-    background-color: rgb(208, 70, 70);
-    border-color: rgb(208, 70, 70);
+    background-color: rgb(208, 70, 70) !important;
+    border-color: rgb(208, 70, 70) !important;
     border-radius: 25px;
 }
 
 .delete-button:hover {
-    background-color: #fff;
-    color: rgb(208, 70, 70);
+    background-color: #fff !important;
+    color: rgb(208, 70, 70) !important;
+    border-color: rgb(208, 70, 70) !important;
+}
+
+.small-font {
+    font-size: 10px;
+}
+
+#table-margin {
+    margin-bottom: 0px !important;
+    border-collapse: separate;
+    border-spacing: 1px;
+}
+
+.delete-income-expense {
+    width: 300px;
+    background-color: rgb(208, 70, 70) !important;
+    border-color: rgb(208, 70, 70) !important;
+    border-radius: 25px;
+}
+
+.delete-income-expense:hover {
+    background-color: #fff !important;
+    color: rgb(208, 70, 70) !important;
+    border-color: rgb(208, 70, 70) !important;
 }
 
 @media (min-width: 1401px) {
     .settings-container {
         min-width: 800px;
+    }
+
+    .incomes-container, .expenses-container, .balance-container {
+        min-width: 630px;
     }
 }
 
@@ -273,12 +302,24 @@ tbody {
         height: 400px;
         width: 600px;
     }
+
+    .incomes-expenses-container {
+        width: auto;
+    }
 }
 
 @media (min-width: 651px) and (max-width: 849px) {
+    .incomes-container, .expenses-container, .balance-container, .settings-container {
+        min-width: 600px;
+    }
+
     #piechart {
         height: 350px;
         width: 500px;
+    }
+
+    .incomes-expenses-container {
+        width: auto;
     }
 }
 
@@ -296,12 +337,16 @@ tbody {
     .flexible-button {
         width: 150px !important;
     }
+
+    .incomes-expenses-container {
+        width: auto;
+    }
 }
 
 @media (min-width: 200px) and (max-width: 535px) {
     .incomes-container, .expenses-container, .balance-container, .settings-container {
         padding: 5px;
-        min-width: 385px;
+        min-width: 424px;
     }
 
     #piechart {
@@ -311,5 +356,9 @@ tbody {
 
     .flexible-button {
         width: 100px !important;
+    }
+
+    .incomes-expenses-container {
+        width: auto;
     }
 }

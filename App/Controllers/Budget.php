@@ -8,6 +8,7 @@ use \App\Models\Income;
 use \App\Models\Expense;
 use \App\Models\Balance;
 use \App\Validator;
+use \App\Flash;
 
 class Budget extends Authenticated
 {
@@ -115,5 +116,39 @@ class Budget extends Authenticated
         $expense->save();
 
         View::renderTemplate('Budget/expense.html', ['expense' => $expense]);
-    } 
+    }
+
+    public function editIncomeAction()
+    {
+        $income_id = $_GET['id'];
+
+        $income = Income::fetchIncomeById($income_id);
+
+        View::renderTemplate('Budget/edit_income.html', ['income' => $income]);
+    }
+
+    public function updateIncomeAction()
+    {   
+        $income = new Income();
+        $income_id = $_GET['id'];
+
+        if ($income->update($_POST, $income_id)) {
+            Flash::addMessage('Zmiany zostały zapisane');
+
+            $this->redirect('/Budget/currentMonth');
+        } else {
+            View::renderTemplate('Budget/edit_income.html', ['income' => $income]);
+        }
+    }
+
+    public function deleteIncomeAction()
+    {   
+        $income_id = $_GET['id'];
+
+        Income::delete($income_id);
+
+        Flash::addMessage('Przychód został usunięty');
+
+        $this->redirect('/Budget/currentMonth');
+    }
 }
