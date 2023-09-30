@@ -143,8 +143,8 @@ class IncomeCategory extends \Core\Model
             $categories = $this->fetchCategoriesAssignedToUser($user_id);
 
             foreach ($categories as $category) {
-                if ($category == $this->name) {
-                    $errors[] = 'Kategoria już istnieje';
+                if (strtolower($category) == strtolower($this->name)) {
+                    $errors[] = 'Kategoria ' . $category .  ' już istnieje';
                 }
             }
             
@@ -163,8 +163,8 @@ class IncomeCategory extends \Core\Model
             $categories = $this->fetchCategoriesAssignedToUser($user_id);
 
             foreach ($categories as $category) {
-                if ($category == $this->new_name) {
-                    $errors[] = 'Nazwa kategorii jest już zajęta';
+                if (strtolower($category) == strtolower($this->new_name)) {
+                    $errors[] = 'Kategoria ' . $category .  ' już istnieje';
                 }
             }
             

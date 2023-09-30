@@ -68,7 +68,7 @@ class PaymentMethod extends \Core\Model
         $this->save_errors = $this->validate($user_id);
 
 
-        if (empty($this->errors)) {
+        if (empty($this->save_errors)) {
             $sql = 'INSERT INTO payment_methods_assigned_to_users (user_id, name)
                     VALUES (:user_id, :name)';
 
@@ -143,8 +143,8 @@ class PaymentMethod extends \Core\Model
             $methods = $this->fetchMethodsAssignedToUser($user_id);
 
             foreach ($methods as $method) {
-                if ($method == $this->name) {
-                    $errors[] = 'Metoda płatności już istnieje';
+                if (strtolower($method) == strtolower($this->name)) {
+                    $errors[] = 'Metoda płatności ' . $method . ' już istnieje';
                 }
             }
             
@@ -162,8 +162,8 @@ class PaymentMethod extends \Core\Model
             $methods = $this->fetchMethodsAssignedToUser($user_id);
 
             foreach ($methods as $method) {
-                if ($method == $this->new_name) {
-                    $errors[] = 'Nazwa metody płatności jest już zajęta';
+                if (strtolower($method) == strtolower($this->new_name)) {
+                    $errors[] = 'Nazwa metody płatności ' . $method . ' jest już zajęta';
                 }
             }
             

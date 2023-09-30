@@ -9,7 +9,7 @@
         e.preventDefault();
 
         if (confirm("Czy chcesz na pewno usunąć konto?")) {
-            var frm = $("<form>");
+            let frm = $("<form>");
             frm.attr('method', 'post');
             frm.attr('action', $(this).attr('href'));
             frm.appendTo("body");
