@@ -4,6 +4,7 @@ namespace App\Models;
 
 use PDO;
 use \Core\View;
+use \App\Models\Income;
 
 class IncomeCategory extends \Core\Model
 {    
@@ -143,8 +144,8 @@ class IncomeCategory extends \Core\Model
             $categories = $this->fetchCategoriesAssignedToUser($user_id);
 
             foreach ($categories as $category) {
-                if ($category == $this->name) {
-                    $errors[] = 'Kategoria już istnieje';
+                if (strtolower($category) == strtolower($this->name)) {
+                    $errors[] = 'Kategoria ' . $category .  ' już istnieje';
                 }
             }
             
@@ -163,8 +164,8 @@ class IncomeCategory extends \Core\Model
             $categories = $this->fetchCategoriesAssignedToUser($user_id);
 
             foreach ($categories as $category) {
-                if ($category == $this->new_name) {
-                    $errors[] = 'Nazwa kategorii jest już zajęta';
+                if (strtolower($category) == strtolower($this->new_name)) {
+                    $errors[] = 'Kategoria ' . $category .  ' już istnieje';
                 }
             }
             
@@ -197,6 +198,10 @@ class IncomeCategory extends \Core\Model
             
         } else {
             $errors[] = 'Kategoria jest wymagana';
+        }
+
+        if (in_array($this->id, Income::fetchIncomeIdAndCategoryIdAssignedToUser())) {
+            $errors[] = 'Kategoria jest przypisana do przychodów. Usuń te przychody lub zmień w nich kategorię.';
         }
 
         return $errors;

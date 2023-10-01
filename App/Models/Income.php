@@ -109,6 +109,31 @@ class Income extends \Core\Model
         return $stmt->fetch();
     }
 
+    public static function fetchIncomeIdAndCategoryIdAssignedToUser()
+    {
+        $user_id = $_SESSION['user_id'];
+
+        $sql = 'SELECT id, income_category_assigned_to_user_id
+                FROM incomes
+                WHERE user_id = :user_id';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam('user_id', $user_id, PDO::PARAM_STR);
+        
+        $stmt->execute();
+
+        $rows = $stmt->fetchAll();
+
+        $categories = [];
+
+        foreach ($rows as $row) {
+            $categories[$row['id']] = $row['income_category_assigned_to_user_id'];
+        }
+
+        return $categories;
+    }
+
     public function update($data, $id)
     {
         $this->income_category_assigned_to_user_id = $data['income_category_assigned_to_user_id'];

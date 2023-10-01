@@ -3,8 +3,7 @@
 {% block title %}Edytuj konto{% endblock%}
 
 {% block footer %}
-    <script src="/js/hideShowPassword.min.js"></script>
-    <script src="/js/app.js"></script>
+    <script src="/js/script.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -39,10 +38,6 @@
                         remote: 'Email jest już zajęty'
                     }
                 }
-            });
-            $('#inputPassword').hideShowPassword({
-                show: false,
-                innerToggle: 'focus'
             });
         });
     </script>

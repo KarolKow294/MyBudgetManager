@@ -4,7 +4,7 @@
 
 {% block footer %}
 
-    <script src="/js/app.js"></script>
+    <script src="/js/script.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -40,20 +40,6 @@
         range: jQuery.validator.format("Proszę wprowadzić wartość pomiędzy {0} i {1}."),
         max: jQuery.validator.format("Proszę wprowadzić wartość mniejszą lub równą {0}."),
         min: jQuery.validator.format("Proszę wprowadzić wartość większą lub równą {0}.")
-        });
-    </script>
-
-    <script>
-        $("#delete-expense").on("click", function(e) {
-            e.preventDefault();
-
-            if (confirm("Czy chcesz na pewno usunąć wydatek?")) {
-                var frm = $("<form>");
-                frm.attr('method', 'post');
-                frm.attr('action', $(this).attr('href'));
-                frm.appendTo("body");
-                frm.submit();
-            }
         });
     </script>
 

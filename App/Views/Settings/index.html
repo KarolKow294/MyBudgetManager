@@ -3,21 +3,7 @@
 {% block title %}Ustawienia{% endblock%}
 
 {% block footer %}
-
-<script>
-    $("#delete-user").on("click", function(e) {
-        e.preventDefault();
-
-        if (confirm("Czy chcesz na pewno usunąć konto?")) {
-            var frm = $("<form>");
-            frm.attr('method', 'post');
-            frm.attr('action', $(this).attr('href'));
-            frm.appendTo("body");
-            frm.submit();
-        }
-    });
-</script>
-
+    <script src="/js/script.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -285,7 +271,7 @@
                                             {% endfor %}
                             
                                         </select>
-                                        <button class="btn btn-primary flexible-button delete-button" type="submit">Usuń</button>
+                                        <button id="delete-income-category" class="btn btn-primary flexible-button delete-button" type="submit">Usuń</button>
                                     </div>
                                 </form>
                         
@@ -317,7 +303,7 @@
                                             {% endfor %}
                             
                                         </select>
-                                        <button class="btn btn-primary flexible-button delete-button" type="submit">Usuń</button>
+                                        <button id="delete-expense-category" class="btn btn-primary flexible-button delete-button" type="submit">Usuń</button>
                                     </div>
                                 </form>
 
@@ -349,7 +335,7 @@
                                             {% endfor %}
                         
                                         </select>
-                                        <button class="btn btn-primary flexible-button delete-button" type="submit">Usuń</button>
+                                        <button id="delete-payment-method" class="btn btn-primary flexible-button delete-button" type="submit">Usuń</button>
                                     </div>
                                 </form>
                             </td>

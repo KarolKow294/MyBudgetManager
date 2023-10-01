@@ -4,6 +4,7 @@ namespace App\Models;
 
 use PDO;
 use \Core\View;
+use \App\Models\Expense;
 
 class ExpenseCategory extends \Core\Model
 { 
@@ -143,8 +144,8 @@ class ExpenseCategory extends \Core\Model
             $categories = $this->fetchCategoriesAssignedToUser($user_id);
 
             foreach ($categories as $category) {
-                if ($category == $this->name) {
-                    $errors[] = 'Kategoria już istnieje';
+                if (strtolower($category) == strtolower($this->name)) {
+                    $errors[] = 'Kategoria ' . $category . ' już istnieje';
                 }
             }
             
@@ -163,8 +164,8 @@ class ExpenseCategory extends \Core\Model
             $categories = $this->fetchCategoriesAssignedToUser($user_id);
 
             foreach ($categories as $category) {
-                if ($category == $this->new_name) {
-                    $errors[] = 'Nazwa kategorii jest już zajęta';
+                if (strtolower($category) == strtolower($this->new_name)) {
+                    $errors[] = 'Kategoria ' . $category . ' już istnieje';
                 }
             }
             
@@ -197,6 +198,10 @@ class ExpenseCategory extends \Core\Model
             
         } else {
             $errors[] = 'Kategoria jest wymagana';
+        }
+
+        if (in_array($this->id, Expense::fetchExpenseIdAndCategoryIdAssignedToUser())) {
+            $errors[] = 'Kategoria jest przypisana do wydatków. Usuń te wydatki lub zmień w nich kategorię.';
         }
 
         return $errors;
