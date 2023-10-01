@@ -4,6 +4,7 @@ namespace App\Models;
 
 use PDO;
 use \Core\View;
+use \App\Models\Expense;
 
 class PaymentMethod extends \Core\Model
 {
@@ -196,6 +197,10 @@ class PaymentMethod extends \Core\Model
             
         } else {
             $errors[] = 'Metoda płatności jest wymagana';
+        }
+
+        if (in_array($this->id, Expense::fetchExpenseIdAndMethodIdAssignedToUser())) {
+            $errors[] = 'Metoda jest przypisana do wydatków. Usuń te wydatki lub zmień w nich metodę.';
         }
 
         return $errors;

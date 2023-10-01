@@ -4,6 +4,7 @@ namespace App\Models;
 
 use PDO;
 use \Core\View;
+use \App\Models\Expense;
 
 class ExpenseCategory extends \Core\Model
 { 
@@ -197,6 +198,10 @@ class ExpenseCategory extends \Core\Model
             
         } else {
             $errors[] = 'Kategoria jest wymagana';
+        }
+
+        if (in_array($this->id, Expense::fetchExpenseIdAndCategoryIdAssignedToUser())) {
+            $errors[] = 'Kategoria jest przypisana do wydatków. Usuń te wydatki lub zmień w nich kategorię.';
         }
 
         return $errors;

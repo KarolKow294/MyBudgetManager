@@ -113,6 +113,56 @@ class Expense extends \Core\Model
         return $stmt->fetch();
     }
 
+    public static function fetchExpenseIdAndCategoryIdAssignedToUser()
+    {
+        $user_id = $_SESSION['user_id'];
+
+        $sql = 'SELECT id, expense_category_assigned_to_user_id
+                FROM expenses
+                WHERE user_id = :user_id';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam('user_id', $user_id, PDO::PARAM_STR);
+        
+        $stmt->execute();
+
+        $rows = $stmt->fetchAll();
+
+        $categories = [];
+
+        foreach ($rows as $row) {
+            $categories[$row['id']] = $row['expense_category_assigned_to_user_id'];
+        }
+
+        return $categories;
+    }
+
+    public static function fetchExpenseIdAndMethodIdAssignedToUser()
+    {
+        $user_id = $_SESSION['user_id'];
+
+        $sql = 'SELECT id, payment_method_assigned_to_user_id
+                FROM expenses
+                WHERE user_id = :user_id';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam('user_id', $user_id, PDO::PARAM_STR);
+        
+        $stmt->execute();
+
+        $rows = $stmt->fetchAll();
+
+        $categories = [];
+
+        foreach ($rows as $row) {
+            $categories[$row['id']] = $row['payment_method_assigned_to_user_id'];
+        }
+
+        return $categories;
+    }
+
     public function update($data, $id)
     {
         $this->payment_method_assigned_to_user_id = $data['payment_method_assigned_to_user_id'];
