@@ -63,6 +63,18 @@ body {
     margin: 20px;
 }
 
+.limits {
+    width: 300px;
+    padding: 0px;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+}
+
+#category-limit {
+    padding-top: 20px;
+}
+
 .input-group-text, .form-control {
     border-radius: 25px;
 }

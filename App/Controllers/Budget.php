@@ -9,6 +9,7 @@ use \App\Models\Expense;
 use \App\Models\Balance;
 use \App\Validator;
 use \App\Flash;
+use \App\Models\ExpenseCategory;
 
 class Budget extends Authenticated
 {
@@ -184,5 +185,13 @@ class Budget extends Authenticated
         Flash::addMessage('Wydatek został usunięty');
 
         $this->redirect('/Budget/currentMonth');
+    }
+
+    public function limitAction()
+    {
+        $user_id = $this->user->id;
+        $category = $this->route_params['category'];
+
+        echo json_encode(ExpenseCategory::getLimit($user_id, $category), JSON_UNESCAPED_UNICODE);
     }
 }

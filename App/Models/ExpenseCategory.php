@@ -62,6 +62,24 @@ class ExpenseCategory extends \Core\Model
         return $categories;
     }
 
+    public static function getLimit($user_id, $name)
+    {
+        $sql = 'SELECT amount_limit
+                FROM expenses_category_assigned_to_users
+                WHERE user_id = :user_id AND name = :name';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam('user_id', $user_id, PDO::PARAM_STR);
+        $stmt->bindParam('name', $name, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result['amount_limit'];
+    }
+
     public function save()
     {
         $user_id = $_SESSION['user_id'];
