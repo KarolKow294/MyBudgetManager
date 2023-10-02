@@ -295,6 +295,10 @@ tbody {
     border-color: rgb(208, 70, 70) !important;
 }
 
+#edit-income-category-id, #edit-expense-category-id, #edit-payment-method-id {
+    display: none;
+}
+
 @media (min-width: 1401px) {
     .settings-container {
         min-width: 800px;
@@ -379,7 +383,7 @@ tbody {
         width: auto;
     }
 
-    #input-settings {
+    #input-settings, #edit-income-category-id, #edit-expense-category-id, #edit-payment-method-id {
         width: 50px !important;
     }
 
