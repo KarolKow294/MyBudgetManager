@@ -5,6 +5,7 @@
 {% block footer %}
 
     <script src="/js/script.js"></script>
+    <script src="/js/limit.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -67,7 +68,7 @@
                                         <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
                                       </svg> Informacja o limicie:
                                 </h5>
-                                <p class="text-body-secondary">Ta kategoria podlega miesięcznemu limitowi na kwotę 1000 zł.</p>
+                                <p id="limit-info" class="text-body-secondary">Wybierz kategorię aby sprawdzić limit przypisany do niej.</p>
                                 </div>
                             </li>
                             <li class="list-group-item">
@@ -143,7 +144,8 @@
                             </svg>
                         </span>
                         <select class="form-select" name="payment_method_assigned_to_user_id" aria-label="Payment Select Groupe" required>
-                            
+                                <option disabled selected value> -- Wybierz metodę -- </option>
+
                             {% for key, method in payment_methods %}
                                 <option value="{{ key }}">{{ method }}</option>
                             {% endfor %}
@@ -158,8 +160,9 @@
                             <path fill-rule="evenodd" d="M7.964 1.527c-2.977 0-5.571 1.704-6.32 4.125h-.55A1 1 0 0 0 .11 6.824l.254 1.46a1.5 1.5 0 0 0 1.478 1.243h.263c.3.513.688.978 1.145 1.382l-.729 2.477a.5.5 0 0 0 .48.641h2a.5.5 0 0 0 .471-.332l.482-1.351c.635.173 1.31.267 2.011.267.707 0 1.388-.095 2.028-.272l.543 1.372a.5.5 0 0 0 .465.316h2a.5.5 0 0 0 .478-.645l-.761-2.506C13.81 9.895 14.5 8.559 14.5 7.069c0-.145-.007-.29-.02-.431.261-.11.508-.266.705-.444.315.306.815.306.815-.417 0 .223-.5.223-.461-.026a.95.95 0 0 0 .09-.255.7.7 0 0 0-.202-.645.58.58 0 0 0-.707-.098.735.735 0 0 0-.375.562c-.024.243.082.48.32.654a2.112 2.112 0 0 1-.259.153c-.534-2.664-3.284-4.595-6.442-4.595zM2.516 6.26c.455-2.066 2.667-3.733 5.448-3.733 3.146 0 5.536 2.114 5.536 4.542 0 1.254-.624 2.41-1.67 3.248a.5.5 0 0 0-.165.535l.66 2.175h-.985l-.59-1.487a.5.5 0 0 0-.629-.288c-.661.23-1.39.359-2.157.359a6.558 6.558 0 0 1-2.157-.359.5.5 0 0 0-.635.304l-.525 1.471h-.979l.633-2.15a.5.5 0 0 0-.17-.534 4.649 4.649 0 0 1-1.284-1.541.5.5 0 0 0-.446-.275h-.56a.5.5 0 0 1-.492-.414l-.254-1.46h.933a.5.5 0 0 0 .488-.393zm12.621-.857a.565.565 0 0 1-.098.21.704.704 0 0 1-.044-.025c-.146-.09-.157-.175-.152-.223a.236.236 0 0 1 .117-.173c.049-.027.08-.021.113.012a.202.202 0 0 1 .064.199z"/>
                             </svg>
                         </span>
-                        <select name="expense_category_assigned_to_user_id" class="form-select" aria-label="Expense Select Groupe">
-                            
+                        <select id="category-field" name="expense_category_assigned_to_user_id" class="form-select" aria-label="Expense Select Groupe">
+                            <option disabled selected value> -- Wybierz kategorię -- </option>
+
                             {% for key, category in expense_categories %}
                                 <option value="{{ key }}">{{ category }}</option>
                             {% endfor %}

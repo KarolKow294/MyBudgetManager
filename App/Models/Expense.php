@@ -163,6 +163,29 @@ class Expense extends \Core\Model
         return $categories;
     }
 
+    public static function getTotalExpensesForCategoryAndDate($user_id, $id, $start_date, $end_date)
+    {
+        $convertedStartDate = strtotime($start_date);
+        $convertedEndDate = strtotime($end_date);
+
+        $sql = 'SELECT SUM(amount) total_amount_for_category
+                FROM expenses
+                WHERE user_id = :user_id AND expense_category_assigned_to_user_id = :id AND date_of_expense BETWEEN :start_date AND :end_date';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->bindValue(':start_date', $start_date, PDO::PARAM_STR);
+        $stmt->bindValue(':end_date', $end_date, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result['total_amount_for_category'];
+    }
+
     public function update($data, $id)
     {
         $this->payment_method_assigned_to_user_id = $data['payment_method_assigned_to_user_id'];

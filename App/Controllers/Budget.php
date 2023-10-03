@@ -190,8 +190,18 @@ class Budget extends Authenticated
     public function limitAction()
     {
         $user_id = $this->user->id;
-        $category = $this->route_params['category'];
+        $id = $this->route_params['id'];
 
-        echo json_encode(ExpenseCategory::getLimit($user_id, $category), JSON_UNESCAPED_UNICODE);
+        echo json_encode(ExpenseCategory::getLimit($user_id, $id), JSON_UNESCAPED_UNICODE);
+    }
+
+    public function totalAction()
+    {
+        $user_id = $this->user->id;
+        $id = $this->route_params['id'];
+        $start_date = $_GET['start_date'];
+        $end_date = $_GET['end_date'];
+
+        echo json_encode(Expense::getTotalExpensesForCategoryAndDate($user_id, $id, $start_date, $end_date), JSON_UNESCAPED_UNICODE);
     }
 }
