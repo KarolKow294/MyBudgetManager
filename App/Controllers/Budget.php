@@ -199,8 +199,10 @@ class Budget extends Authenticated
     {
         $user_id = $this->user->id;
         $id = $this->route_params['id'];
-        $start_date = $_GET['start_date'];
-        $end_date = $_GET['end_date'];
+        $date = $_GET['date'];
+
+        $start_date = date('Y-m-01', strtotime($date));
+        $end_date = date('Y-m-t', strtotime($date));
 
         echo json_encode(Expense::getTotalExpensesForCategoryAndDate($user_id, $id, $start_date, $end_date), JSON_UNESCAPED_UNICODE);
     }
