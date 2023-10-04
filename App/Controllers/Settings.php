@@ -63,7 +63,11 @@ class Settings extends Authenticated
     {
         $expense_category = new ExpenseCategory($_POST);
 
-        $expense_category->update();
+        if ($expense_category->new_name == '') {
+            $expense_category->updateOnlyLimit();
+        } else {
+            $expense_category->update();
+        }
 
         View::renderTemplate('Settings/index.html', ['expense_category' => $expense_category]);
     }

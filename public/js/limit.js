@@ -3,19 +3,14 @@ let dateField = document.querySelector("#date-field");
 let amountField = document.querySelector("#amount-field");
 
 categoryField.addEventListener("change", async () => {
-
     eventsAction();
 })
 
 dateField.addEventListener("change", async () => {
-
-
     eventsAction();
 })
 
 amountField.addEventListener("input", async () => {
-
-
     eventsAction();
 })
 
@@ -78,7 +73,7 @@ const renderExpenseBox = async (categoryFieldValue, dateFieldValue) => {
     try {
         const result = await getTotalForCategory(categoryFieldValue, dateFieldValue);
         if (result) {
-            document.querySelector("#expense-in-current-month").innerHTML = result;
+            document.querySelector("#expense-in-current-month").innerHTML = `${result} zł`;
         } else {
             document.querySelector("#expense-in-current-month").innerHTML = "Nie masz wydatków w danym miesiącu.";
         }
@@ -107,10 +102,10 @@ const renderLeftBox = async (categoryFieldValue, dateFieldValue, amountFieldValu
             document.querySelector("#cash-left").innerHTML = "Brak limitu przypisanego do kategoii.";
             document.querySelector("#cash-left").style.setProperty("color", "rgba(33, 37, 41, 0.75)", "important");
         } else if (cashLeft < 0) {
-            document.querySelector("#cash-left").innerHTML = cashLeft;
+            document.querySelector("#cash-left").innerHTML = `${cashLeft.toFixed(2)} zł`;
             document.querySelector("#cash-left").style.setProperty("color", "red", "important");
         } else if (cashLeft) {
-            document.querySelector("#cash-left").innerHTML = cashLeft;
+            document.querySelector("#cash-left").innerHTML = `${cashLeft.toFixed(2)} zł`;
             document.querySelector("#cash-left").style.setProperty("color", "rgba(33, 37, 41, 0.75)", "important");
         }
         

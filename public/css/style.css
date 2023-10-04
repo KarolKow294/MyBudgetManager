@@ -381,7 +381,7 @@ tbody {
         width: auto;
     }
 
-    #input-settings, #edit-income-category-id, #edit-expense-category-id, #edit-payment-method-id {
+    #add-income-category-id, #add-expense-category-id, #add-payment-method-id, #add-limit-settings, #edit-income-category-id, #edit-expense-category-id, #edit-payment-method-id {
         width: 50px !important;
     }
 
