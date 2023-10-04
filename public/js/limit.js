@@ -1,20 +1,43 @@
 let categoryField = document.querySelector("#category-field");
 let dateField = document.querySelector("#date-field");
+let amountField = document.querySelector("#amount-field");
 
 categoryField.addEventListener("change", async () => {
-    let categoryFieldValue = categoryField.value;
-    renderInfoBox(categoryFieldValue);
-    let dateFieldValue = dateField.value;
-    renderExpenseBox(categoryFieldValue, dateFieldValue);
+
+    eventsAction();
 })
 
 dateField.addEventListener("change", async () => {
+
+
+    eventsAction();
+})
+
+amountField.addEventListener("input", async () => {
+
+
+    eventsAction();
+})
+
+const eventsAction = async () => {
     let categoryFieldValue = categoryField.value;
     let dateFieldValue = dateField.value;
+    let amountFieldValue = amountField.value;
+
     if (categoryFieldValue) {
+        renderInfoBox(categoryFieldValue);
+        renderExpenseBox(categoryFieldValue, dateFieldValue);
+        renderLeftBox(categoryFieldValue, dateFieldValue, amountFieldValue);
+    }
+
+    if (categoryFieldValue && dateFieldValue) {
         renderExpenseBox(categoryFieldValue, dateFieldValue);
     }
-})
+
+    if (categoryFieldValue && dateFieldValue && amountFieldValue) {
+        renderLeftBox(categoryFieldValue, dateFieldValue, amountFieldValue);
+    }
+}
 
 const getLimitForCategory = async (id) => {
     try {
@@ -40,8 +63,8 @@ const renderInfoBox = async (categoryFieldValue) => {
     try {
         const result = await getLimitForCategory(categoryFieldValue);
         let limitInfo = '';
-        if (result == '0.00') {
-            limitInfo = `Ta kategoria nie posiada limitu.`;
+        if (result == "0.00") {
+            limitInfo = `Ta kategoria nie posiada limitu.\n`;
         } else {
             limitInfo = `Ta kategoria podlega miesięcznemu limitowi na kwotę ${result} zł.`;
         }     
@@ -58,6 +81,37 @@ const renderExpenseBox = async (categoryFieldValue, dateFieldValue) => {
             document.querySelector("#expense-in-current-month").innerHTML = result;
         } else {
             document.querySelector("#expense-in-current-month").innerHTML = "Nie masz wydatków w danym miesiącu.";
+        }
+        
+    } catch (e) {
+        console.log(`ERROR`, e);
+    }
+}
+
+const renderLeftBox = async (categoryFieldValue, dateFieldValue, amountFieldValue) => {
+    try {
+        let limit;
+        let total;
+
+        if (categoryFieldValue) {
+            limit = await getLimitForCategory(categoryFieldValue);
+        }
+        
+        if (categoryFieldValue && dateFieldValue) {
+            total = await getTotalForCategory(categoryFieldValue, dateFieldValue);
+        }
+
+        let cashLeft = limit - total - amountFieldValue;
+            
+        if (limit == "0.00") {
+            document.querySelector("#cash-left").innerHTML = "Brak limitu przypisanego do kategoii.";
+            document.querySelector("#cash-left").style.setProperty("color", "rgba(33, 37, 41, 0.75)", "important");
+        } else if (cashLeft < 0) {
+            document.querySelector("#cash-left").innerHTML = cashLeft;
+            document.querySelector("#cash-left").style.setProperty("color", "red", "important");
+        } else if (cashLeft) {
+            document.querySelector("#cash-left").innerHTML = cashLeft;
+            document.querySelector("#cash-left").style.setProperty("color", "rgba(33, 37, 41, 0.75)", "important");
         }
         
     } catch (e) {
