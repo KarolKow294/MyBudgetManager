@@ -9,6 +9,7 @@ use \App\Models\Expense;
 use \App\Models\Balance;
 use \App\Validator;
 use \App\Flash;
+use \App\Models\ExpenseCategory;
 
 class Budget extends Authenticated
 {
@@ -184,5 +185,25 @@ class Budget extends Authenticated
         Flash::addMessage('Wydatek został usunięty');
 
         $this->redirect('/Budget/currentMonth');
+    }
+
+    public function limitAction()
+    {
+        $user_id = $this->user->id;
+        $id = $this->route_params['id'];
+
+        echo json_encode(ExpenseCategory::getLimit($user_id, $id), JSON_UNESCAPED_UNICODE);
+    }
+
+    public function totalAction()
+    {
+        $user_id = $this->user->id;
+        $id = $this->route_params['id'];
+        $date = $_GET['date'];
+
+        $start_date = date('Y-m-01', strtotime($date));
+        $end_date = date('Y-m-t', strtotime($date));
+
+        echo json_encode(Expense::getTotalExpensesForCategoryAndDate($user_id, $id, $start_date, $end_date), JSON_UNESCAPED_UNICODE);
     }
 }

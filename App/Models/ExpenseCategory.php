@@ -11,10 +11,14 @@ class ExpenseCategory extends \Core\Model
     public $id;
     public $name;
     public $new_name;
+    public $amount_limit;
     public $save_success;
     public $save_errors = [];
+    public $save_limit_errors = [];
     public $update_success;
+    public $update_limit_success;
     public $update_errors = [];
+    public $update_limit_errors = [];
     public $delete_success;
     public $delete_errors = [];
 
@@ -62,22 +66,42 @@ class ExpenseCategory extends \Core\Model
         return $categories;
     }
 
+    public static function getLimit($user_id, $id)
+    {
+        $sql = 'SELECT amount_limit
+                FROM expenses_category_assigned_to_users
+                WHERE user_id = :user_id AND id = :id';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam('user_id', $user_id, PDO::PARAM_STR);
+        $stmt->bindParam('id', $id, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result['amount_limit'];
+    }
+
     public function save()
     {
         $user_id = $_SESSION['user_id'];
 
         $this->save_errors = $this->validate($user_id);
+        $this->save_limit_errors = $this->validateLimit($user_id);
 
 
-        if (empty($this->save_errors)) {
-            $sql = 'INSERT INTO expenses_category_assigned_to_users (user_id, name)
-                    VALUES (:user_id, :name)';
+        if (empty($this->save_errors) && empty($this->save_limit_errors)) {
+            $sql = 'INSERT INTO expenses_category_assigned_to_users (user_id, name, amount_limit)
+                    VALUES (:user_id, :name, :amount_limit)';
 
             $db = static::getDB();
             $stmt = $db->prepare($sql);
 
-            $stmt->bindValue(':user_id', $user_id, PDO::PARAM_STR);
+            $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
             $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
+            $stmt->bindValue(':amount_limit', $this->amount_limit, PDO::PARAM_STR);
 
             $this->save_success = true;
 
@@ -91,21 +115,49 @@ class ExpenseCategory extends \Core\Model
         $user_id = $_SESSION['user_id'];
 
         $this->update_errors = $this->validateNewName($user_id);
+        $this->update_limit_errors = $this->validateLimit($user_id);
 
-        if (empty($this->update_errors)) {
+        if (empty($this->update_errors) && empty($this->update_limit_errors)) {
 
             $sql = 'UPDATE expenses_category_assigned_to_users
-                    SET name = :new_name
+                    SET name = :new_name, amount_limit = :amount_limit
                     WHERE id = :id AND user_id = :user_id';
 
             $db = static::getDB();
             $stmt = $db->prepare($sql);
 
             $stmt->bindValue(':new_name', $this->new_name, PDO::PARAM_STR);
-            $stmt->bindValue(':id', $this->id, PDO::PARAM_STR);
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
             $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->bindValue(':amount_limit', $this->amount_limit, PDO::PARAM_STR);
 
             $this->update_success = true;
+
+            return $stmt->execute();
+        }
+        return false;
+    }
+
+    public function updateOnlyLimit()
+    {
+        $user_id = $_SESSION['user_id'];
+
+        $this->update_errors = $this->validateLimit($user_id);
+
+        if (empty($this->update_errors)) {
+
+            $sql = 'UPDATE expenses_category_assigned_to_users
+                    SET amount_limit = :amount_limit
+                    WHERE id = :id AND user_id = :user_id';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
+            $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->bindValue(':amount_limit', $this->amount_limit, PDO::PARAM_STR);
+
+            $this->update_limit_success = true;
 
             return $stmt->execute();
         }
@@ -126,7 +178,7 @@ class ExpenseCategory extends \Core\Model
             $db = static::getDB();
             $stmt = $db->prepare($sql);
 
-            $stmt->bindValue(':id', $this->id, PDO::PARAM_STR);
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
             $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
 
             $this->delete_success = true;
@@ -167,10 +219,23 @@ class ExpenseCategory extends \Core\Model
                 if (strtolower($category) == strtolower($this->new_name)) {
                     $errors[] = 'Kategoria ' . $category . ' już istnieje';
                 }
-            }
-            
+            } 
+
         } else {
             $errors[] = 'Nazwa jest wymagana';
+        }
+
+        return $errors;
+    }
+
+    private function validateLimit($user_id)
+    {
+        $errors = [];
+
+        if ($this->amount_limit != '') {
+            if (! preg_match("/^-?[0-9]+(?:\.[0-9]{1,2})?$/", $this->amount_limit)) {
+                $errors[] = 'Wprowadź prawidłowy limit';
+            }
         }
 
         return $errors;

@@ -100,7 +100,8 @@
                 </svg>
             </span>
             <select class="form-select" name="income_category_assigned_to_user_id" aria-label="Income Select Groupe" required>
-                
+                <option disabled selected value> -- Wybierz kategorię -- </option>
+
                 {% for key, category in income_categories %}
                     <option value="{{ key }}">{{ category }}</option>
                 {% endfor %}

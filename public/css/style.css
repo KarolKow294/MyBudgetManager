@@ -63,6 +63,16 @@ body {
     margin: 20px;
 }
 
+.limits {
+    width: 300px;
+    height: 382px;
+    padding: 0px;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+}
+
 .input-group-text, .form-control {
     border-radius: 25px;
 }
@@ -283,6 +293,10 @@ tbody {
     border-color: rgb(208, 70, 70) !important;
 }
 
+#edit-income-category-id, #edit-expense-category-id, #edit-payment-method-id {
+    display: none;
+}
+
 @media (min-width: 1401px) {
     .settings-container {
         min-width: 800px;
@@ -367,7 +381,7 @@ tbody {
         width: auto;
     }
 
-    #input-settings {
+    #add-income-category-id, #add-expense-category-id, #add-payment-method-id, #add-limit-settings, #edit-income-category-id, #edit-expense-category-id, #edit-payment-method-id {
         width: 50px !important;
     }
 

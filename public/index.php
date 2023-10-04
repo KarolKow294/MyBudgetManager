@@ -12,6 +12,9 @@ session_start();
 
 $router = new Core\Router();
 
+$router->add('api/limit/{id:[\0-9]+}', ['controller' => 'Budget', 'action' => 'limit']);
+$router->add('api/total/{id:[\0-9]+}', ['controller' => 'Budget', 'action' => 'total']);
+
 $router->add('', ['controller' => 'Home', 'action' => 'index']);
 $router->add('login', ['controller' => 'Login', 'action' => 'new']);
 $router->add('logout', ['controller' => 'Login', 'action' => 'destroy']);
