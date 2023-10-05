@@ -8,7 +8,7 @@ editCategoryButton.addEventListener("click", async () => {
 
 const getLimitForCategory = async (id) => {
     try {
-        const res = await fetch(`../api/limit/${id}`);
+        const res = await fetch(`/api/limit/${id}`);
         const data = await res.json();
         return data;
     } catch (e) {

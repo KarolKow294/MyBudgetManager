@@ -103,7 +103,7 @@
                     </header>
                     
                     {% if expense.success == 'true' %}
-                        <p class="green-text">Wydatek na kwotę {{ expense.amount }} zł z dnia {{ expense.date_of_expense }} został dodany</p>
+                        <p class="green-text">Wydatek na kwotę {{ expense.amount }} zł <br>z dnia {{ expense.date_of_expense }} został dodany</p>
                     {% endif %}
 
                     {% if expense.errors is not empty %}

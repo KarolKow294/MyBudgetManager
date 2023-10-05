@@ -21,8 +21,6 @@ const eventsAction = async () => {
 
     if (categoryFieldValue) {
         renderInfoBox(categoryFieldValue);
-        renderExpenseBox(categoryFieldValue, dateFieldValue);
-        renderLeftBox(categoryFieldValue, dateFieldValue, amountFieldValue);
     }
 
     if (categoryFieldValue && dateFieldValue) {
@@ -36,7 +34,7 @@ const eventsAction = async () => {
 
 const getLimitForCategory = async (id) => {
     try {
-        const res = await fetch(`../api/limit/${id}`);
+        const res = await fetch(`/api/limit/${id}`);
         const data = await res.json();
         return data;
     } catch (e) {
@@ -46,7 +44,7 @@ const getLimitForCategory = async (id) => {
 
 const getTotalForCategory = async (id, date) => {
     try {
-        const res = await fetch(`../api/total/${id}?date=${date}`);
+        const res = await fetch(`/api/total/${id}?date=${date}`);
         const data = await res.json();
         return data;
     } catch (e) {
