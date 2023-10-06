@@ -101,7 +101,7 @@ class ExpenseCategory extends \Core\Model
 
             $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
             $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
-            $stmt->bindValue(':amount_limit', $this->amount_limit, PDO::PARAM_STR);
+            $stmt->bindValue(':amount_limit', floatval($this->amount_limit), PDO::PARAM_STR);
 
             $this->save_success = true;
 
